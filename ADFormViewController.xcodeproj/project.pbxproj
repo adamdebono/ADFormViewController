@@ -1,0 +1,249 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A250657617535DAD0095B09D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A250657517535DAD0095B09D /* Foundation.framework */; };
+		A250657B17535DAD0095B09D /* ADFormViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A250657A17535DAD0095B09D /* ADFormViewController.h */; };
+		A250657D17535DAD0095B09D /* ADFormViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A250657C17535DAD0095B09D /* ADFormViewController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		A250657017535DAD0095B09D /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/${PRODUCT_NAME}";
+			dstSubfolderSpec = 16;
+			files = (
+				A250657B17535DAD0095B09D /* ADFormViewController.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		A250657217535DAD0095B09D /* libADFormViewController.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libADFormViewController.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A250657517535DAD0095B09D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		A250657917535DAD0095B09D /* ADFormViewController-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ADFormViewController-Prefix.pch"; sourceTree = "<group>"; };
+		A250657A17535DAD0095B09D /* ADFormViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ADFormViewController.h; sourceTree = "<group>"; };
+		A250657C17535DAD0095B09D /* ADFormViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ADFormViewController.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A250656F17535DAD0095B09D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A250657617535DAD0095B09D /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A250656917535DAD0095B09D = {
+			isa = PBXGroup;
+			children = (
+				A250657717535DAD0095B09D /* ADFormViewController */,
+				A250657417535DAD0095B09D /* Frameworks */,
+				A250657317535DAD0095B09D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A250657317535DAD0095B09D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A250657217535DAD0095B09D /* libADFormViewController.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A250657417535DAD0095B09D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A250657517535DAD0095B09D /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A250657717535DAD0095B09D /* ADFormViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A250657A17535DAD0095B09D /* ADFormViewController.h */,
+				A250657C17535DAD0095B09D /* ADFormViewController.m */,
+				A250657817535DAD0095B09D /* Supporting Files */,
+			);
+			path = ADFormViewController;
+			sourceTree = "<group>";
+		};
+		A250657817535DAD0095B09D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				A250657917535DAD0095B09D /* ADFormViewController-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A250657117535DAD0095B09D /* ADFormViewController */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A250658017535DAD0095B09D /* Build configuration list for PBXNativeTarget "ADFormViewController" */;
+			buildPhases = (
+				A250656E17535DAD0095B09D /* Sources */,
+				A250656F17535DAD0095B09D /* Frameworks */,
+				A250657017535DAD0095B09D /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ADFormViewController;
+			productName = ADFormViewController;
+			productReference = A250657217535DAD0095B09D /* libADFormViewController.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A250656A17535DAD0095B09D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = "Adam Debono";
+			};
+			buildConfigurationList = A250656D17535DAD0095B09D /* Build configuration list for PBXProject "ADFormViewController" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = A250656917535DAD0095B09D;
+			productRefGroup = A250657317535DAD0095B09D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A250657117535DAD0095B09D /* ADFormViewController */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A250656E17535DAD0095B09D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A250657D17535DAD0095B09D /* ADFormViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		A250657E17535DAD0095B09D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		A250657F17535DAD0095B09D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A250658117535DAD0095B09D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/ADFormViewController.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ADFormViewController/ADFormViewController-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		A250658217535DAD0095B09D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/ADFormViewController.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ADFormViewController/ADFormViewController-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A250656D17535DAD0095B09D /* Build configuration list for PBXProject "ADFormViewController" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A250657E17535DAD0095B09D /* Debug */,
+				A250657F17535DAD0095B09D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A250658017535DAD0095B09D /* Build configuration list for PBXNativeTarget "ADFormViewController" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A250658117535DAD0095B09D /* Debug */,
+				A250658217535DAD0095B09D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A250656A17535DAD0095B09D /* Project object */;
+}

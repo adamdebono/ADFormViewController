@@ -9,7 +9,15 @@
 /* Begin PBXBuildFile section */
 		A250657617535DAD0095B09D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A250657517535DAD0095B09D /* Foundation.framework */; };
 		A250657B17535DAD0095B09D /* ADFormViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A250657A17535DAD0095B09D /* ADFormViewController.h */; };
-		A250657D17535DAD0095B09D /* ADFormViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A250657C17535DAD0095B09D /* ADFormViewController.m */; };
+		A250658417535DCC0095B09D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A250658317535DCC0095B09D /* UIKit.framework */; };
+		A250658B17535E7E0095B09D /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A250658A17535E7E0095B09D /* CoreFoundation.framework */; };
+		A250659117535E7E0095B09D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A250658F17535E7E0095B09D /* InfoPlist.strings */; };
+		A250659717535E950095B09D /* ADTextFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A250659617535E950095B09D /* ADTextFieldCell.xib */; };
+		A250659C17535F7D0095B09D /* ADTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A250659917535E9F0095B09D /* ADTextFieldCell.m */; };
+		A25065A0175361090095B09D /* ADSectionObject.m in Sources */ = {isa = PBXBuildFile; fileRef = A250659F175361090095B09D /* ADSectionObject.m */; };
+		A25065A3175361330095B09D /* ADCellObject.m in Sources */ = {isa = PBXBuildFile; fileRef = A25065A2175361330095B09D /* ADCellObject.m */; };
+		A25065A5175364E00095B09D /* ADFormViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A250657C17535DAD0095B09D /* ADFormViewController.m */; };
+		A25065A817536B5A0095B09D /* ADTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A25065A717536B5A0095B09D /* ADTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -31,6 +39,22 @@
 		A250657917535DAD0095B09D /* ADFormViewController-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ADFormViewController-Prefix.pch"; sourceTree = "<group>"; };
 		A250657A17535DAD0095B09D /* ADFormViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ADFormViewController.h; sourceTree = "<group>"; };
 		A250657C17535DAD0095B09D /* ADFormViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ADFormViewController.m; sourceTree = "<group>"; };
+		A250658317535DCC0095B09D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		A250658917535E7E0095B09D /* ADFormViewControllerResources.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ADFormViewControllerResources.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		A250658A17535E7E0095B09D /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		A250658E17535E7E0095B09D /* ADFormViewControllerResources-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ADFormViewControllerResources-Info.plist"; sourceTree = "<group>"; };
+		A250659017535E7E0095B09D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A250659217535E7E0095B09D /* ADFormViewControllerResources-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ADFormViewControllerResources-Prefix.pch"; sourceTree = "<group>"; };
+		A250659617535E950095B09D /* ADTextFieldCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ADTextFieldCell.xib; sourceTree = "<group>"; };
+		A250659817535E9F0095B09D /* ADTextFieldCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ADTextFieldCell.h; sourceTree = "<group>"; };
+		A250659917535E9F0095B09D /* ADTextFieldCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ADTextFieldCell.m; sourceTree = "<group>"; };
+		A250659E175361090095B09D /* ADSectionObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADSectionObject.h; sourceTree = "<group>"; };
+		A250659F175361090095B09D /* ADSectionObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADSectionObject.m; sourceTree = "<group>"; };
+		A25065A1175361330095B09D /* ADCellObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADCellObject.h; sourceTree = "<group>"; };
+		A25065A2175361330095B09D /* ADCellObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADCellObject.m; sourceTree = "<group>"; };
+		A25065A4175362560095B09D /* ADFormViewConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADFormViewConstants.h; sourceTree = "<group>"; };
+		A25065A617536B5A0095B09D /* ADTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADTableViewCell.h; sourceTree = "<group>"; };
+		A25065A717536B5A0095B09D /* ADTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADTableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,7 +62,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A250658417535DCC0095B09D /* UIKit.framework in Frameworks */,
 				A250657617535DAD0095B09D /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A250658617535E7E0095B09D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A250658B17535E7E0095B09D /* CoreFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -49,6 +82,7 @@
 			isa = PBXGroup;
 			children = (
 				A250657717535DAD0095B09D /* ADFormViewController */,
+				A250658C17535E7E0095B09D /* ADFormViewControllerResources */,
 				A250657417535DAD0095B09D /* Frameworks */,
 				A250657317535DAD0095B09D /* Products */,
 			);
@@ -58,6 +92,7 @@
 			isa = PBXGroup;
 			children = (
 				A250657217535DAD0095B09D /* libADFormViewController.a */,
+				A250658917535E7E0095B09D /* ADFormViewControllerResources.bundle */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -66,6 +101,8 @@
 			isa = PBXGroup;
 			children = (
 				A250657517535DAD0095B09D /* Foundation.framework */,
+				A250658317535DCC0095B09D /* UIKit.framework */,
+				A250658A17535E7E0095B09D /* CoreFoundation.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -73,9 +110,12 @@
 		A250657717535DAD0095B09D /* ADFormViewController */ = {
 			isa = PBXGroup;
 			children = (
+				A250659D175360D70095B09D /* Objects */,
+				A250659A17535EA30095B09D /* Cells */,
 				A250657A17535DAD0095B09D /* ADFormViewController.h */,
 				A250657C17535DAD0095B09D /* ADFormViewController.m */,
 				A250657817535DAD0095B09D /* Supporting Files */,
+				A25065A4175362560095B09D /* ADFormViewConstants.h */,
 			);
 			path = ADFormViewController;
 			sourceTree = "<group>";
@@ -86,6 +126,47 @@
 				A250657917535DAD0095B09D /* ADFormViewController-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A250658C17535E7E0095B09D /* ADFormViewControllerResources */ = {
+			isa = PBXGroup;
+			children = (
+				A250659617535E950095B09D /* ADTextFieldCell.xib */,
+				A250658D17535E7E0095B09D /* Supporting Files */,
+			);
+			path = ADFormViewControllerResources;
+			sourceTree = "<group>";
+		};
+		A250658D17535E7E0095B09D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				A250658E17535E7E0095B09D /* ADFormViewControllerResources-Info.plist */,
+				A250658F17535E7E0095B09D /* InfoPlist.strings */,
+				A250659217535E7E0095B09D /* ADFormViewControllerResources-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A250659A17535EA30095B09D /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				A250659817535E9F0095B09D /* ADTextFieldCell.h */,
+				A250659917535E9F0095B09D /* ADTextFieldCell.m */,
+				A25065A617536B5A0095B09D /* ADTableViewCell.h */,
+				A25065A717536B5A0095B09D /* ADTableViewCell.m */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
+		A250659D175360D70095B09D /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				A250659E175361090095B09D /* ADSectionObject.h */,
+				A250659F175361090095B09D /* ADSectionObject.m */,
+				A25065A1175361330095B09D /* ADCellObject.h */,
+				A25065A2175361330095B09D /* ADCellObject.m */,
+			);
+			name = Objects;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -108,12 +189,30 @@
 			productReference = A250657217535DAD0095B09D /* libADFormViewController.a */;
 			productType = "com.apple.product-type.library.static";
 		};
+		A250658817535E7E0095B09D /* ADFormViewControllerResources */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A250659317535E7E0095B09D /* Build configuration list for PBXNativeTarget "ADFormViewControllerResources" */;
+			buildPhases = (
+				A250658517535E7E0095B09D /* Sources */,
+				A250658617535E7E0095B09D /* Frameworks */,
+				A250658717535E7E0095B09D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ADFormViewControllerResources;
+			productName = ADFormViewControllerResources;
+			productReference = A250658917535E7E0095B09D /* ADFormViewControllerResources.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		A250656A17535DAD0095B09D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = AD;
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = "Adam Debono";
 			};
@@ -130,20 +229,55 @@
 			projectRoot = "";
 			targets = (
 				A250657117535DAD0095B09D /* ADFormViewController */,
+				A250658817535E7E0095B09D /* ADFormViewControllerResources */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A250658717535E7E0095B09D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A250659117535E7E0095B09D /* InfoPlist.strings in Resources */,
+				A250659717535E950095B09D /* ADTextFieldCell.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		A250656E17535DAD0095B09D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A250657D17535DAD0095B09D /* ADFormViewController.m in Sources */,
+				A250659C17535F7D0095B09D /* ADTextFieldCell.m in Sources */,
+				A25065A0175361090095B09D /* ADSectionObject.m in Sources */,
+				A25065A3175361330095B09D /* ADCellObject.m in Sources */,
+				A25065A5175364E00095B09D /* ADFormViewController.m in Sources */,
+				A25065A817536B5A0095B09D /* ADTableViewCell.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A250658517535E7E0095B09D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		A250658F17535E7E0095B09D /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A250659017535E7E0095B09D /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		A250657E17535DAD0095B09D /* Debug */ = {
@@ -223,6 +357,43 @@
 			};
 			name = Release;
 		};
+		A250659417535E7E0095B09D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ADFormViewControllerResources/ADFormViewControllerResources-Prefix.pch";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				INFOPLIST_FILE = "ADFormViewControllerResources/ADFormViewControllerResources-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		A250659517535E7E0095B09D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ADFormViewControllerResources/ADFormViewControllerResources-Prefix.pch";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				INFOPLIST_FILE = "ADFormViewControllerResources/ADFormViewControllerResources-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -240,6 +411,14 @@
 			buildConfigurations = (
 				A250658117535DAD0095B09D /* Debug */,
 				A250658217535DAD0095B09D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		A250659317535E7E0095B09D /* Build configuration list for PBXNativeTarget "ADFormViewControllerResources" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A250659417535E7E0095B09D /* Debug */,
+				A250659517535E7E0095B09D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};

@@ -27,4 +27,8 @@
 	return self;
 }
 
+- (NSString *)description {
+	return [[super description] stringByAppendingFormat:@", cells: %@", [self cells]];
+}
+
 @end

@@ -54,6 +54,7 @@
 	_reloadOnAppear = NO;
 	
 	_returnKeyType = UIReturnKeyGo;
+	_doneAction = NULL;
 }
 
 #pragma mark - View Lifecycle
@@ -67,7 +68,7 @@
 	
 	if ([self reloadOnAppear]) {
 		_reloadOnAppear = NO;
-		[self reload];
+		[self reload:NO];
 	}
 }
 
@@ -87,6 +88,22 @@
 	[super viewDidDisappear:animated];
 }
 
+#pragma mark - Perform Action
+
+- (void)performDoneAction {
+	[[self findFirstResponder] resignFirstResponder];
+	
+	if ([self validateFields]) {
+		if ([self doneAction]) {
+			[self doneAction]([self allValues]);
+		}
+	}
+}
+
+- (BOOL)validateFields {
+	return YES;
+}
+
 #pragma mark - Sections
 
 - (void)addSectionWithHeaderTitle:(NSString *)headerTitle andFooterTitle:(NSString *)footerTitle {
@@ -94,9 +111,8 @@
 }
 
 - (void)insertSectionAtIndex:(NSUInteger)index withHeaderTitle:(NSString *)headerTitle andFooterTitle:(NSString *)footerTitle {
-	//make sure there is enough sections before it
-	while (index > [[self tableViewContent] count] - 1) {
-		[self addSectionWithHeaderTitle:nil andFooterTitle:nil];
+	if ([[self tableViewContent] count] < index) {
+		[self insertSectionAtIndex:index-1 withHeaderTitle:nil andFooterTitle:nil];
 	}
 	
 	ADSectionObject *section = [ADSectionObject sectionWithHeaderTitle:headerTitle footerTitle:footerTitle];
@@ -109,23 +125,65 @@
 #pragma mark - Cells
 
 - (void)setCellAtIndexPath:(NSIndexPath *)indexPath withIdentifier:(NSString *)identifer title:(NSString *)title type:(ADFormCellType)type {
-	//make sure there is enough sections
-	while ([indexPath section] >= [[self tableViewContent] count] - 1) {
-		[self addSectionWithHeaderTitle:nil andFooterTitle:nil];
+	ADCellObject *cellObject = [ADCellObject cell];
+	
+	[cellObject setIdentifier:identifer];
+	[cellObject setTitle:title];
+	[cellObject setType:type];
+	
+	[self setCellAtIndexPath:indexPath withCellObject:cellObject];
+}
+
+- (void)setCellAtIndexPath:(NSIndexPath *)indexPath withCellObject:(ADCellObject *)cellObject {
+	if ([[self tableViewContent] count] <= [indexPath section]) {
+		[self insertSectionAtIndex:[indexPath section] withHeaderTitle:nil andFooterTitle:nil];
 	}
 	
 	ADSectionObject *sectionObject = [[self tableViewContent] objectAtIndex:[indexPath section]];
-	ADCellObject *cellObject = [ADCellObject cell];
-	
 	[[sectionObject cells] addObject:cellObject];
 	
 	[self reload];
 }
 
+#pragma mark - Values
+
+- (id)valueForIdentifier:(NSString *)identifier {
+	for (ADSectionObject *sectionObject in [self tableViewContent]) {
+		for (ADCellObject *cellObject in [sectionObject cells]) {
+			if ([[cellObject identifier] isEqualToString:identifier]) {
+				return [cellObject value];
+			}
+		}
+	}
+	
+	return nil;
+}
+
+- (NSDictionary *)allValues {
+	NSMutableDictionary *values = [NSMutableDictionary dictionary];
+	for (ADSectionObject *sectionObject in [self tableViewContent]) {
+		for (ADCellObject *cellObject in [sectionObject cells]) {
+			switch ([cellObject type]) {
+				case ADFormCellTypeDoneButton:
+					break;
+				default:
+					[values setValue:[cellObject value] forKey:[cellObject identifier]];
+					break;
+			}
+		}
+	}
+	
+	return [NSDictionary dictionaryWithDictionary:values];
+}
+
 #pragma mark - Table View Data Source
 
 - (void)reload {
-	if (![self onScreen]) {
+	[self reload:YES];
+}
+
+- (void)reload:(BOOL)check {
+	if (![self onScreen] && check) {
 		_reloadOnAppear = YES;
 		return;
 	}
@@ -137,6 +195,7 @@
 		[[sectionObject cells] enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(ADCellObject *cellObject, NSUInteger row, BOOL *stop) {
 			if ([cellObject type] == ADFormCellTypeText) {
 				if (last) {
+					last = NO;
 					[[(ADTextFieldCell *)[cellObject cell] textField] setReturnKeyType:[self returnKeyType]];
 					[[(ADTextFieldCell *)[cellObject cell] textField] setDelegate:self];
 				} else {
@@ -148,11 +207,30 @@
 		}];
 	}];
 	
+	NSInteger i=0;
+	for (NSIndexPath *indexPath in [self textFieldCellIndexPaths]) {
+		ADCellObject *cellObject = [[[[self tableViewContent] objectAtIndex:[indexPath section]] cells] objectAtIndex:[indexPath row]];
+		ADTextFieldCell *cell = (ADTextFieldCell *)[cellObject cell];
+		[cell setTag:i];
+		
+		i++;
+	}
+	
 	[[self tableView] reloadData];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 	return [[self tableViewContent] count];
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+	ADSectionObject *sectionObject = [[self tableViewContent] objectAtIndex:section];
+	return [sectionObject headerTitle];
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
+	ADSectionObject *sectionObject = [[self tableViewContent] objectAtIndex:section];
+	return [sectionObject footerTitle];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -161,12 +239,76 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-	ADCellObject *cellObject = [[[[self tableViewContent] objectAtIndex:[indexPath row]] cells] objectAtIndex:[indexPath row]];
+	ADCellObject *cellObject = [[[[self tableViewContent] objectAtIndex:[indexPath section]] cells] objectAtIndex:[indexPath row]];
 	return [cellObject cell];
 }
 
 #pragma mark - Table View Delegate
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+	ADCellObject *cellObject = [[[[self tableViewContent] objectAtIndex:[indexPath section]] cells] objectAtIndex:[indexPath row]];
+	
+	switch ([cellObject type]) {
+		case ADFormCellTypeDoneButton:
+			[self performDoneAction];
+			[tableView deselectRowAtIndexPath:indexPath animated:YES];
+			break;
+		case ADFormCellTypeText:
+			[[(ADTextFieldCell *)[cellObject cell] textField] becomeFirstResponder];
+			break;
+	}
+}
+
 #pragma mark - Text Field Delegate
+
+- (UIView *)findFirstResponder {
+	return [self findFirstResponderForView:[self view]];
+}
+
+- (UIView *)findFirstResponderForView:(UIView *)view {
+    if ([view isFirstResponder]) {
+        return view;
+    }
+	
+    for (UIView *subView in [view subviews]) {
+        UIView *firstResponder = [self findFirstResponderForView:subView];
+		
+        if (firstResponder != nil) {
+            return firstResponder;
+        }
+    }
+	
+    return nil;
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+	NSIndexPath *indexPath = [[self textFieldCellIndexPaths] objectAtIndex:[textField tag]];
+	[[self tableView] scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+	NSString *completeString = [string stringByReplacingCharactersInRange:range withString:string];
+	
+	NSIndexPath *indexPath = [[self textFieldCellIndexPaths] objectAtIndex:[textField tag]];
+	ADCellObject *cellObject = [[[[self tableViewContent] objectAtIndex:[indexPath section]] cells] objectAtIndex:[indexPath row]];
+	[cellObject setValue:completeString];
+	
+	return YES;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+	if ([textField returnKeyType] == UIReturnKeyNext) {
+		NSIndexPath *indexPath = [[self textFieldCellIndexPaths] objectAtIndex:[textField tag]+1];
+		//make sure it's on screen
+		[[self tableView] scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+		
+		ADCellObject *cellObject = [[[[self tableViewContent] objectAtIndex:[indexPath section]] cells] objectAtIndex:[indexPath row]];
+		[[(ADTextFieldCell *)[cellObject cell] textField] becomeFirstResponder];
+	} else {
+		[self performDoneAction];
+	}
+	
+	return YES;
+}
 
 @end

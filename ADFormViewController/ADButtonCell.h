@@ -1,5 +1,5 @@
 //
-//  ADTableViewCell.h
+//  ADButtonCell.h
 //  ADFormViewController
 //
 //  Created by Adam Debono on 27/05/13.
@@ -8,10 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ADTableViewCell : UITableViewCell
+#import "ADTableViewCell.h"
 
-+ (NSString *)bundleName;
-
-@property (nonatomic) IBOutlet UILabel *label;
+@interface ADButtonCell : ADTableViewCell
 
 @end

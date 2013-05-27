@@ -8,6 +8,7 @@
 
 #import "ADCellObject.h"
 
+#import "ADButtonCell.h"
 #import "ADTextFieldCell.h"
 
 @interface ADCellObject () <UITextFieldDelegate>
@@ -21,12 +22,30 @@
 	return [[ADCellObject alloc] init];
 }
 
+- (id)init {
+	if (self = [super init]) {
+		_identifier = nil;
+		_title = nil;
+		_value = nil;
+	}
+	
+	return self;
+}
+
 - (ADTableViewCell *)cell {
 	if (!_cell) {
 		switch ([self type]) {
+			case ADFormCellTypeDoneButton:
+				_cell = [[ADButtonCell alloc] init];
+				break;
 			case ADFormCellTypeText:
-				_cell = [ADTextFieldCell alloc];
+				_cell = [[ADTextFieldCell alloc] init];
+				//make sure it's a string
 				
+				if (![self value]) {
+					_value = @"";
+				}
+				[[(ADTextFieldCell *)[self cell] textField] setText:[NSString stringWithFormat:@"%@", [self value]]];
 				break;
 		}
 		
@@ -34,6 +53,10 @@
 	}
 	
 	return _cell;
+}
+
+- (NSString *)description {
+	return [[super description] stringByAppendingFormat:@" id: %@, value: %@", [self identifier], [self value]];
 }
 
 @end

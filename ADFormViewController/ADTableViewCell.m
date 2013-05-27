@@ -15,25 +15,20 @@
 @end
 
 @implementation ADTableViewCell
-//@synthesize reuseIdentifier = _reuseIdentifier;
 
 - (id)init {
-	NSString *path = [[NSBundle mainBundle] pathForResource:[[self class] bundleName] ofType:@"bundle"];
+	NSString *path = [[NSBundle mainBundle] pathForResource:@"ADFormViewControllerResources" ofType:@"bundle"];
 	NSBundle *bundle = [NSBundle bundleWithPath:path];
-	self = [[bundle loadNibNamed:@"CBTextFieldCell" owner:self options:nil] objectAtIndex:0];
+	self = [[bundle loadNibNamed:[[self class] bundleName] owner:self options:nil] objectAtIndex:0];
 	if (self) {
-		[self setReuseIdentifier:[[self class] reuseIdentifier]];
+		[self setReuseIdentifier:[[self class] bundleName]];
 	}
 	
 	return self;
 }
 
 + (NSString *)bundleName {
-	return nil;
-}
-
-+ (NSString *)reuseIdentifier {
-	return nil;
+	return NSStringFromClass([self class]);
 }
 
 @end

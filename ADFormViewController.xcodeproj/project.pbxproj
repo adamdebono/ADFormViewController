@@ -18,6 +18,8 @@
 		A25065A3175361330095B09D /* ADCellObject.m in Sources */ = {isa = PBXBuildFile; fileRef = A25065A2175361330095B09D /* ADCellObject.m */; };
 		A25065A5175364E00095B09D /* ADFormViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A250657C17535DAD0095B09D /* ADFormViewController.m */; };
 		A25065A817536B5A0095B09D /* ADTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A25065A717536B5A0095B09D /* ADTableViewCell.m */; };
+		A25065CA1753873C0095B09D /* ADButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A25065C91753873C0095B09D /* ADButtonCell.m */; };
+		A25065CC175387680095B09D /* ADButtonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A25065CB175387680095B09D /* ADButtonCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -55,6 +57,9 @@
 		A25065A4175362560095B09D /* ADFormViewConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADFormViewConstants.h; sourceTree = "<group>"; };
 		A25065A617536B5A0095B09D /* ADTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADTableViewCell.h; sourceTree = "<group>"; };
 		A25065A717536B5A0095B09D /* ADTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADTableViewCell.m; sourceTree = "<group>"; };
+		A25065C81753873C0095B09D /* ADButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADButtonCell.h; sourceTree = "<group>"; };
+		A25065C91753873C0095B09D /* ADButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADButtonCell.m; sourceTree = "<group>"; };
+		A25065CB175387680095B09D /* ADButtonCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ADButtonCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +136,7 @@
 		A250658C17535E7E0095B09D /* ADFormViewControllerResources */ = {
 			isa = PBXGroup;
 			children = (
+				A25065CB175387680095B09D /* ADButtonCell.xib */,
 				A250659617535E950095B09D /* ADTextFieldCell.xib */,
 				A250658D17535E7E0095B09D /* Supporting Files */,
 			);
@@ -154,6 +160,8 @@
 				A250659917535E9F0095B09D /* ADTextFieldCell.m */,
 				A25065A617536B5A0095B09D /* ADTableViewCell.h */,
 				A25065A717536B5A0095B09D /* ADTableViewCell.m */,
+				A25065C81753873C0095B09D /* ADButtonCell.h */,
+				A25065C91753873C0095B09D /* ADButtonCell.m */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -241,6 +249,7 @@
 			files = (
 				A250659117535E7E0095B09D /* InfoPlist.strings in Resources */,
 				A250659717535E950095B09D /* ADTextFieldCell.xib in Resources */,
+				A25065CC175387680095B09D /* ADButtonCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,6 +265,7 @@
 				A25065A3175361330095B09D /* ADCellObject.m in Sources */,
 				A25065A5175364E00095B09D /* ADFormViewController.m in Sources */,
 				A25065A817536B5A0095B09D /* ADTableViewCell.m in Sources */,
+				A25065CA1753873C0095B09D /* ADButtonCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -413,6 +423,7 @@
 				A250658217535DAD0095B09D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A250659317535E7E0095B09D /* Build configuration list for PBXNativeTarget "ADFormViewControllerResources" */ = {
 			isa = XCConfigurationList;
@@ -421,6 +432,7 @@
 				A250659517535E7E0095B09D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

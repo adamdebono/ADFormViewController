@@ -10,23 +10,4 @@
 
 @implementation ADTextFieldCell
 
-- (id)init {
-	NSString *path = [[NSBundle mainBundle] pathForResource:@"ADFormViewControllerResources" ofType:@"bundle"];
-	NSBundle *bundle = [NSBundle bundleWithPath:path];
-	self = [[bundle loadNibNamed:@"CBTextFieldCell" owner:self options:nil] objectAtIndex:0];
-	if (self) {
-		
-	}
-	
-	return self;
-}
-
-+ (NSString *)reuseIdentifier {
-	return @"ADTextFieldCell";
-}
-
-+ (NSString *)bundleName {
-	return @"ADTextFieldCell";
-}
-
 @end

@@ -18,7 +18,7 @@
 @property (nonatomic) ADFormCellType type;
 @property (nonatomic) NSString *identifier;
 @property (nonatomic) NSString *title;
-@property (nonatomic) NSString *value;
+@property (nonatomic) id value;
 
 @property (nonatomic, readonly) ADTableViewCell *cell;
 

@@ -287,7 +287,7 @@
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-	NSString *completeString = [string stringByReplacingCharactersInRange:range withString:string];
+	NSString *completeString = [[textField text] stringByReplacingCharactersInRange:range withString:string];
 	
 	NSIndexPath *indexPath = [[self textFieldCellIndexPaths] objectAtIndex:[textField tag]];
 	ADCellObject *cellObject = [[[[self tableViewContent] objectAtIndex:[indexPath section]] cells] objectAtIndex:[indexPath row]];

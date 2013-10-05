@@ -15,4 +15,7 @@
 @property (nonatomic) IBOutlet UILabel *label;
 @property (nonatomic) IBOutlet UILabel *detailLabel;
 
+@property (nonatomic) IBOutlet NSLayoutConstraint *leadingConstraint;
+@property (nonatomic) IBOutlet NSLayoutConstraint *trailingConstraint;
+
 @end

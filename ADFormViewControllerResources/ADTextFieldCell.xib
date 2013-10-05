@@ -46,7 +46,9 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="label" destination="3" id="20"/>
+                <outlet property="leadingConstraint" destination="Zmv-Ks-BVb" id="R9V-h3-NRH"/>
                 <outlet property="textField" destination="6" id="21"/>
+                <outlet property="trailingConstraint" destination="aG5-7I-W6y" id="fyH-6r-ira"/>
             </connections>
         </tableViewCell>
     </objects>

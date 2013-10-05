@@ -59,6 +59,8 @@
 				NSAssert([self options], @"Must provide options");
 				[self setValue:_value];
 				
+				[[_cell textLabel] setFont:[UIFont systemFontOfSize:17]];
+				[[_cell detailLabel] setFont:[UIFont systemFontOfSize:14]];
 				break;
 			case ADFormCellTypeText:
 				_cell = [[ADTextFieldCell alloc] init];

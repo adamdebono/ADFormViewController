@@ -22,6 +22,11 @@
 	self = [[bundle loadNibNamed:[[self class] nibName] owner:self options:nil] objectAtIndex:0];
 	if (self) {
 		[self setReuseIdentifier:[[self class] nibName]];
+		
+		if ([[[UIDevice currentDevice] systemVersion] floatValue] < 7.0f) {
+			[[self leadingConstraint] setConstant:10.0f];
+			[[self trailingConstraint] setConstant:10.0f];
+		}
 	}
 	
 	return self;

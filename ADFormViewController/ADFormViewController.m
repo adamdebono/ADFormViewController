@@ -14,10 +14,16 @@
 #import "ADTableViewCell.h"
 #import "ADTextFieldCell.h"
 
+#import "UIImage+bundle.h"
+
 @interface ADFormViewController () <UITextFieldDelegate>
 
 @property (nonatomic) NSMutableArray *tableViewContent;
-@property (nonatomic) NSMutableArray *textFieldCellIndexPaths;
+@property (nonatomic) NSMutableArray *selectableCellIndexPaths;
+
+@property (nonatomic) UIToolbar *keyboardToolbar;
+@property (nonatomic) UIBarButtonItem *toolbarPrevButton;
+@property (nonatomic) UIBarButtonItem *toolbarNextButton;
 
 @property (nonatomic) BOOL reloadOnAppear;
 @property (nonatomic) BOOL onScreen;
@@ -48,12 +54,13 @@
 
 - (void)combinedInit {
 	_tableViewContent = [NSMutableArray array];
-	_textFieldCellIndexPaths = [NSMutableArray array];
+	_selectableCellIndexPaths = [NSMutableArray array];
 	
 	_onScreen = NO;
 	_reloadOnAppear = NO;
 	
 	_returnKeyType = UIReturnKeyGo;
+	_showsKeyboardToolbar = NO;
 	_doneAction = NULL;
 	
 	_formEditingEnabled = YES;
@@ -67,6 +74,25 @@
 	if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0f) {
 		[[self tableView] setKeyboardDismissMode:UIScrollViewKeyboardDismissModeInteractive];
 	}
+	
+	_keyboardToolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 0, 44)];
+	
+	NSString *path = [[NSBundle mainBundle] pathForResource:@"ADFormViewControllerResources" ofType:@"bundle"];
+	NSBundle *bundle = [NSBundle bundleWithPath:path];
+	
+	UIImage *leftImage = [UIImage imageNamed:@"arrow-backward" bundle:bundle];
+	UIImage *rightImage = [UIImage imageNamed:@"arrow-forward" bundle:bundle];
+	
+	_toolbarPrevButton = [[UIBarButtonItem alloc] initWithImage:leftImage style:UIBarButtonItemStylePlain target:self action:@selector(previousCell)];
+	_toolbarNextButton = [[UIBarButtonItem alloc] initWithImage:rightImage style:UIBarButtonItemStylePlain target:self action:@selector(nextCell)];
+	
+	UIBarButtonItem *midSeparator = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:NULL];
+	[midSeparator setWidth:20];
+	
+	UIBarButtonItem *separator = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:NULL];
+	UIBarButtonItem *doneItem = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(closeKeyboard)];
+	
+	[[self keyboardToolbar] setItems:@[[self toolbarPrevButton], midSeparator, [self toolbarNextButton], separator, doneItem]];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -189,7 +215,9 @@
 	return [NSDictionary dictionaryWithDictionary:values];
 }
 
-#pragma mark - Table View Data Source
+#pragma mark - Table View
+
+#pragma mark Data Source
 
 - (void)reload {
 	[self reload:YES];
@@ -201,7 +229,7 @@
 		return;
 	}
 	
-	[[self textFieldCellIndexPaths] removeAllObjects];
+	[[self selectableCellIndexPaths] removeAllObjects];
 	
 	__block BOOL last = YES;
 	[[self tableViewContent] enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(ADSectionObject *sectionObject, NSUInteger section, BOOL *stop) {
@@ -215,13 +243,13 @@
 					[[(ADTextFieldCell *)[cellObject cell] textField] setReturnKeyType:UIReturnKeyNext];
 					[[(ADTextFieldCell *)[cellObject cell] textField] setDelegate:self];
 				}
-				[[self textFieldCellIndexPaths] insertObject:[NSIndexPath indexPathForRow:row inSection:section] atIndex:0];
+				[[self selectableCellIndexPaths] insertObject:[NSIndexPath indexPathForRow:row inSection:section] atIndex:0];
 			}
 		}];
 	}];
 	
 	NSInteger i=0;
-	for (NSIndexPath *indexPath in [self textFieldCellIndexPaths]) {
+	for (NSIndexPath *indexPath in [self selectableCellIndexPaths]) {
 		ADCellObject *cellObject = [[[[self tableViewContent] objectAtIndex:[indexPath section]] cells] objectAtIndex:[indexPath row]];
 		//ADTextFieldCell *cell = (ADTextFieldCell *)[cellObject cell];
 		//[[cell textField] setTag:i];
@@ -257,7 +285,7 @@
 	return [cellObject cell];
 }
 
-#pragma mark - Table View Delegate
+#pragma mark Delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	ADCellObject *cellObject = [[[[self tableViewContent] objectAtIndex:[indexPath section]] cells] objectAtIndex:[indexPath row]];
@@ -275,7 +303,7 @@
 	}
 }
 
-#pragma mark - Text Field Delegate
+#pragma mark - Text Field
 
 - (UIView *)findFirstResponder {
 	return [self findFirstResponderForView:[self view]];
@@ -297,22 +325,74 @@
     return nil;
 }
 
+- (BOOL)hasPreviousCell {
+	UITextField *textField = (UITextField *)[self findFirstResponder];
+	return [textField tag] > 1;
+}
+
+- (BOOL)hasNextCell {
+	UITextField *textField = (UITextField *)[self findFirstResponder];
+	return [textField tag] < [[self selectableCellIndexPaths] count] - 1;
+}
+
+- (void)previousCell {
+	if (![self hasPreviousCell]) {
+		return;
+	}
+	
+	UITextField *textField = (UITextField *)[self findFirstResponder];
+	[self selectCellWithTag:[textField tag]-1];
+}
+
+- (void)nextCell {
+	if (![self hasNextCell]) {
+		return;
+	}
+	
+	UITextField *textField = (UITextField *)[self findFirstResponder];
+	[self selectCellWithTag:[textField tag]+1];
+}
+
+- (void)selectCellWithTag:(NSUInteger)tag {
+	NSIndexPath *indexPath = [[self selectableCellIndexPaths] objectAtIndex:tag];
+		
+	ADCellObject *cellObject = [[[[self tableViewContent] objectAtIndex:[indexPath section]] cells] objectAtIndex:[indexPath row]];
+	[[(ADTextFieldCell *)[cellObject cell] textField] becomeFirstResponder];
+}
+
+- (void)closeKeyboard {
+	[[self findFirstResponder] resignFirstResponder];
+}
+
+#pragma mark Delegate
+
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
-	NSIndexPath *indexPath = [[self textFieldCellIndexPaths] objectAtIndex:[textField tag]];
+	NSIndexPath *indexPath = [[self selectableCellIndexPaths] objectAtIndex:[textField tag]];
 	ADCellObject *cellObject = [[[[self tableViewContent] objectAtIndex:[indexPath section]] cells] objectAtIndex:[indexPath row]];
 	
-	return [self isFormEditingEnabled] && [cellObject isEnabled];
+	if ([self isFormEditingEnabled] && [cellObject isEnabled]) {
+		if ([self showsKeyboardToolbar]) {
+			[[cellObject textField] setInputAccessoryView:[self keyboardToolbar]];
+		}
+		
+		return YES;
+	}
+	
+	return NO;
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
-	NSIndexPath *indexPath = [[self textFieldCellIndexPaths] objectAtIndex:[textField tag]];
+	NSIndexPath *indexPath = [[self selectableCellIndexPaths] objectAtIndex:[textField tag]];
 	[[self tableView] scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+	
+	[[self toolbarPrevButton] setEnabled:[self hasPreviousCell]];
+	[[self toolbarNextButton] setEnabled:[self hasNextCell]];
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
 	NSString *completeString = [[textField text] stringByReplacingCharactersInRange:range withString:string];
 	
-	NSIndexPath *indexPath = [[self textFieldCellIndexPaths] objectAtIndex:[textField tag]];
+	NSIndexPath *indexPath = [[self selectableCellIndexPaths] objectAtIndex:[textField tag]];
 	ADCellObject *cellObject = [[[[self tableViewContent] objectAtIndex:[indexPath section]] cells] objectAtIndex:[indexPath row]];
 	[cellObject setValue:completeString];
 	
@@ -320,13 +400,8 @@
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-	if ([textField returnKeyType] == UIReturnKeyNext) {
-		NSIndexPath *indexPath = [[self textFieldCellIndexPaths] objectAtIndex:[textField tag]+1];
-		//make sure it's on screen
-		[[self tableView] scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
-		
-		ADCellObject *cellObject = [[[[self tableViewContent] objectAtIndex:[indexPath section]] cells] objectAtIndex:[indexPath row]];
-		[[(ADTextFieldCell *)[cellObject cell] textField] becomeFirstResponder];
+	if ([self hasNextCell]) {
+		[self nextCell];
 	} else {
 		[self performDoneAction];
 	}

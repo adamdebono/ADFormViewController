@@ -14,6 +14,7 @@ typedef void(^ADDoneAction)(NSDictionary *values);
 @interface ADFormViewController : UITableViewController
 
 @property (nonatomic) UIReturnKeyType returnKeyType;
+@property (nonatomic) BOOL showsKeyboardToolbar;
 @property (nonatomic, copy) ADDoneAction doneAction;
 
 @property (nonatomic, getter = isFormEditingEnabled) BOOL formEditingEnabled;

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8456993217FFB2B3003C08B6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8456993117FFB2B3003C08B6 /* Images.xcassets */; };
+		8456993517FFB3FB003C08B6 /* UIImage+bundle.m in Sources */ = {isa = PBXBuildFile; fileRef = 8456993417FFB3FB003C08B6 /* UIImage+bundle.m */; };
 		A250657617535DAD0095B09D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A250657517535DAD0095B09D /* Foundation.framework */; };
 		A250657B17535DAD0095B09D /* ADFormViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A250657A17535DAD0095B09D /* ADFormViewController.h */; };
 		A250658417535DCC0095B09D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A250658317535DCC0095B09D /* UIKit.framework */; };
@@ -36,6 +38,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		8456993117FFB2B3003C08B6 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		8456993317FFB3FB003C08B6 /* UIImage+bundle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+bundle.h"; sourceTree = "<group>"; };
+		8456993417FFB3FB003C08B6 /* UIImage+bundle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+bundle.m"; sourceTree = "<group>"; };
 		A250657217535DAD0095B09D /* libADFormViewController.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libADFormViewController.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A250657517535DAD0095B09D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A250657917535DAD0095B09D /* ADFormViewController-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ADFormViewController-Prefix.pch"; sourceTree = "<group>"; };
@@ -121,6 +126,8 @@
 				A250657C17535DAD0095B09D /* ADFormViewController.m */,
 				A250657817535DAD0095B09D /* Supporting Files */,
 				A25065A4175362560095B09D /* ADFormViewConstants.h */,
+				8456993317FFB3FB003C08B6 /* UIImage+bundle.h */,
+				8456993417FFB3FB003C08B6 /* UIImage+bundle.m */,
 			);
 			path = ADFormViewController;
 			sourceTree = "<group>";
@@ -139,6 +146,7 @@
 				A25065CB175387680095B09D /* ADButtonCell.xib */,
 				A250659617535E950095B09D /* ADTextFieldCell.xib */,
 				A250658D17535E7E0095B09D /* Supporting Files */,
+				8456993117FFB2B3003C08B6 /* Images.xcassets */,
 			);
 			path = ADFormViewControllerResources;
 			sourceTree = "<group>";
@@ -248,6 +256,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A250659117535E7E0095B09D /* InfoPlist.strings in Resources */,
+				8456993217FFB2B3003C08B6 /* Images.xcassets in Resources */,
 				A250659717535E950095B09D /* ADTextFieldCell.xib in Resources */,
 				A25065CC175387680095B09D /* ADButtonCell.xib in Resources */,
 			);
@@ -266,6 +275,7 @@
 				A25065A5175364E00095B09D /* ADFormViewController.m in Sources */,
 				A25065A817536B5A0095B09D /* ADTableViewCell.m in Sources */,
 				A25065CA1753873C0095B09D /* ADButtonCell.m in Sources */,
+				8456993517FFB3FB003C08B6 /* UIImage+bundle.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

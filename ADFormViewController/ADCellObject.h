@@ -22,7 +22,7 @@
 @property (nonatomic, getter = isEnabled) BOOL enabled;
 
 @property (nonatomic, copy) BOOL (^cellPressedAction)(void);
-@property (nonatomic) NSArray *options;
+@property (nonatomic) id options;
 
 @property (nonatomic, readonly) ADTableViewCell *cell;
 

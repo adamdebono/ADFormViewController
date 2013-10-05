@@ -100,8 +100,18 @@
 		case ADFormCellTypeSingleOption:
 			if (_cell) {
 				if (value) {
-					NSAssert([[self value] isKindOfClass:[NSNumber class]], @"Option cell must have a number value");
-					[[_cell detailLabel] setText:[NSString stringWithFormat:@"%@", [[self options] objectAtIndex:[value integerValue]]]];
+					if ([[self options] isKindOfClass:[NSArray class]]) {
+						//NSAssert([[self options] isKindOfClass:[NSArray class]], @"Number value must point to an array of options");
+						if ([value isKindOfClass:[NSNumber class]]) {
+							_value = [NSString stringWithFormat:@"%@", [[self options] objectAtIndex:[value integerValue]]];
+						}
+						[[_cell detailLabel] setText:[self value]];
+					} else if ([[self options] isKindOfClass:[NSDictionary class]]) {
+						//NSAssert([[self options] isKindOfClass:[NSDictionary class]], @"String value must point to a dictionary of options");
+						[[_cell detailLabel] setText:[NSString stringWithFormat:@"%@", [[self options] objectForKey:value]]];
+					} else {
+						NSAssert(false, @"Option must be either array or dictionary");
+					}
 				} else {
 					[[_cell detailLabel] setText:@"select"];
 				}

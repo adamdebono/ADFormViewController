@@ -10,6 +10,7 @@
 #define ADFormViewController_ADFormViewConstants_h
 
 typedef NS_ENUM(NSInteger, ADFormCellType) {
+	ADFormCellTypeButton,
 	ADFormCellTypeDoneButton,
 	ADFormCellTypeText
 };

@@ -19,6 +19,9 @@
 @property (nonatomic) NSString *identifier;
 @property (nonatomic) NSString *title;
 @property (nonatomic) id value;
+@property (nonatomic, getter = isEnabled) BOOL enabled;
+
+@property (nonatomic, copy) BOOL (^cellPressedAction)(void);
 
 @property (nonatomic, readonly) ADTableViewCell *cell;
 

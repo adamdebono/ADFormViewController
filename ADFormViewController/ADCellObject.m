@@ -27,6 +27,9 @@
 		_identifier = nil;
 		_title = nil;
 		_value = nil;
+		
+		_cellPressedAction = NULL;
+		_enabled = YES;
 	}
 	
 	return self;
@@ -36,6 +39,7 @@
 	if (!_cell) {
 		switch ([self type]) {
 			case ADFormCellTypeDoneButton:
+			case ADFormCellTypeButton:
 				_cell = [[ADButtonCell alloc] init];
 				break;
 			case ADFormCellTypeText:
@@ -57,6 +61,16 @@
 
 - (NSString *)description {
 	return [[super description] stringByAppendingFormat:@" id: %@, value: %@", [self identifier], [self value]];
+}
+
+- (void)setEnabled:(BOOL)enabled {
+	_enabled = enabled;
+	
+	if (enabled) {
+		[[self cell] setBackgroundColor:[UIColor clearColor]];
+	} else {
+		[[self cell] setBackgroundColor:[[UIColor blackColor] colorWithAlphaComponent:0.05]];
+	}
 }
 
 @end

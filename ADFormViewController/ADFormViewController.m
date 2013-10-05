@@ -55,6 +55,8 @@
 	
 	_returnKeyType = UIReturnKeyGo;
 	_doneAction = NULL;
+	
+	_formEditingEnabled = YES;
 }
 
 #pragma mark - View Lifecycle
@@ -247,15 +249,17 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	ADCellObject *cellObject = [[[[self tableViewContent] objectAtIndex:[indexPath section]] cells] objectAtIndex:[indexPath row]];
-	
-	switch ([cellObject type]) {
-		case ADFormCellTypeDoneButton:
-			[self performDoneAction];
-			[tableView deselectRowAtIndexPath:indexPath animated:YES];
-			break;
-		case ADFormCellTypeText:
-			[[(ADTextFieldCell *)[cellObject cell] textField] becomeFirstResponder];
-			break;
+	if ([cellObject isEnabled] && (![cellObject cellPressedAction] || [cellObject cellPressedAction]())) {
+		switch ([cellObject type]) {
+			case ADFormCellTypeDoneButton:
+				[self performDoneAction];
+			case ADFormCellTypeButton:
+				[tableView deselectRowAtIndexPath:indexPath animated:YES];
+				break;
+			case ADFormCellTypeText:
+				[[(ADTextFieldCell *)[cellObject cell] textField] becomeFirstResponder];
+				break;
+		}
 	}
 }
 
@@ -279,6 +283,13 @@
     }
 	
     return nil;
+}
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+	NSIndexPath *indexPath = [[self textFieldCellIndexPaths] objectAtIndex:[textField tag]];
+	ADCellObject *cellObject = [[[[self tableViewContent] objectAtIndex:[indexPath section]] cells] objectAtIndex:[indexPath row]];
+	
+	return [self isFormEditingEnabled] && [cellObject isEnabled];
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {

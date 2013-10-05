@@ -16,6 +16,8 @@ typedef void(^ADDoneAction)(NSDictionary *values);
 @property (nonatomic) UIReturnKeyType returnKeyType;
 @property (nonatomic, copy) ADDoneAction doneAction;
 
+@property (nonatomic, getter = isFormEditingEnabled) BOOL formEditingEnabled;
+
 - (void)addSectionWithHeaderTitle:(NSString *)headerTitle andFooterTitle:(NSString *)footerTitle;
 - (void)insertSectionAtIndex:(NSUInteger)index withHeaderTitle:(NSString *)headerTitle andFooterTitle:(NSString *)footerTitle;
 

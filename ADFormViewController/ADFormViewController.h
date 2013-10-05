@@ -15,6 +15,7 @@ typedef void(^ADDoneAction)(NSDictionary *values);
 
 @property (nonatomic) UIReturnKeyType returnKeyType;
 @property (nonatomic) BOOL showsKeyboardToolbar;
+@property (nonatomic) Class toolbarClass;
 @property (nonatomic, copy) ADDoneAction doneAction;
 
 @property (nonatomic, getter = isFormEditingEnabled) BOOL formEditingEnabled;

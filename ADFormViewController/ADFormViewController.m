@@ -62,9 +62,48 @@
 	
 	_returnKeyType = UIReturnKeyGo;
 	_showsKeyboardToolbar = NO;
+	_toolbarClass = Nil;
 	_doneAction = NULL;
 	
 	_formEditingEnabled = YES;
+}
+
+- (void)setToolbarClass:(Class)toolbarClass {
+	NSAssert([toolbarClass isSubclassOfClass:[UIToolbar class]], @"Custom toolbar class must be a subclass of UIToolbar");
+	
+	_toolbarClass = toolbarClass;
+	
+	_keyboardToolbar = nil;
+}
+
+- (UIToolbar *)keyboardToolbar {
+	if (!_keyboardToolbar) {
+		Class ktClass = [self toolbarClass];
+		if (ktClass == Nil) {
+			ktClass = [UIToolbar class];
+		}
+		
+		_keyboardToolbar = [[ktClass alloc] initWithFrame:CGRectMake(0, 0, 0, 44)];
+		
+		NSString *path = [[NSBundle mainBundle] pathForResource:@"ADFormViewControllerResources" ofType:@"bundle"];
+		NSBundle *bundle = [NSBundle bundleWithPath:path];
+		
+		UIImage *leftImage = [UIImage imageNamed:@"arrow-backward" bundle:bundle];
+		UIImage *rightImage = [UIImage imageNamed:@"arrow-forward" bundle:bundle];
+		
+		_toolbarPrevButton = [[UIBarButtonItem alloc] initWithImage:leftImage style:UIBarButtonItemStylePlain target:self action:@selector(previousCell)];
+		_toolbarNextButton = [[UIBarButtonItem alloc] initWithImage:rightImage style:UIBarButtonItemStylePlain target:self action:@selector(nextCell)];
+		
+		UIBarButtonItem *midSeparator = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:NULL];
+		[midSeparator setWidth:20];
+		
+		UIBarButtonItem *separator = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:NULL];
+		UIBarButtonItem *doneItem = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(closeKeyboard)];
+		
+		[[self keyboardToolbar] setItems:@[[self toolbarPrevButton], midSeparator, [self toolbarNextButton], separator, doneItem]];
+	}
+	
+	return _keyboardToolbar;
 }
 
 #pragma mark - View Lifecycle
@@ -75,25 +114,6 @@
 	if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0f) {
 		[[self tableView] setKeyboardDismissMode:UIScrollViewKeyboardDismissModeInteractive];
 	}
-	
-	_keyboardToolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 0, 44)];
-	
-	NSString *path = [[NSBundle mainBundle] pathForResource:@"ADFormViewControllerResources" ofType:@"bundle"];
-	NSBundle *bundle = [NSBundle bundleWithPath:path];
-	
-	UIImage *leftImage = [UIImage imageNamed:@"arrow-backward" bundle:bundle];
-	UIImage *rightImage = [UIImage imageNamed:@"arrow-forward" bundle:bundle];
-	
-	_toolbarPrevButton = [[UIBarButtonItem alloc] initWithImage:leftImage style:UIBarButtonItemStylePlain target:self action:@selector(previousCell)];
-	_toolbarNextButton = [[UIBarButtonItem alloc] initWithImage:rightImage style:UIBarButtonItemStylePlain target:self action:@selector(nextCell)];
-	
-	UIBarButtonItem *midSeparator = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:NULL];
-	[midSeparator setWidth:20];
-	
-	UIBarButtonItem *separator = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:NULL];
-	UIBarButtonItem *doneItem = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(closeKeyboard)];
-	
-	[[self keyboardToolbar] setItems:@[[self toolbarPrevButton], midSeparator, [self toolbarNextButton], separator, doneItem]];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

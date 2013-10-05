@@ -224,10 +224,15 @@
 	for (ADSectionObject *sectionObject in [self tableViewContent]) {
 		for (ADCellObject *cellObject in [sectionObject cells]) {
 			switch ([cellObject type]) {
+				case ADFormCellTypeButton:
 				case ADFormCellTypeDoneButton:
 					break;
 				default:
-					[values setValue:[cellObject value] forKey:[cellObject identifier]];
+					if ([cellObject value]) {
+						[values setValue:[cellObject value] forKey:[cellObject identifier]];
+					} else {
+						[values setValue:[NSNull null] forKey:[cellObject identifier]];
+					}
 					break;
 			}
 		}

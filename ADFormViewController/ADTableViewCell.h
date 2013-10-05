@@ -10,7 +10,7 @@
 
 @interface ADTableViewCell : UITableViewCell
 
-+ (NSString *)bundleName;
++ (NSString *)nibName;
 
 @property (nonatomic) IBOutlet UILabel *label;
 

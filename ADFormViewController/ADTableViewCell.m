@@ -19,15 +19,15 @@
 - (id)init {
 	NSString *path = [[NSBundle mainBundle] pathForResource:@"ADFormViewControllerResources" ofType:@"bundle"];
 	NSBundle *bundle = [NSBundle bundleWithPath:path];
-	self = [[bundle loadNibNamed:[[self class] bundleName] owner:self options:nil] objectAtIndex:0];
+	self = [[bundle loadNibNamed:[[self class] nibName] owner:self options:nil] objectAtIndex:0];
 	if (self) {
-		[self setReuseIdentifier:[[self class] bundleName]];
+		[self setReuseIdentifier:[[self class] nibName]];
 	}
 	
 	return self;
 }
 
-+ (NSString *)bundleName {
++ (NSString *)nibName {
 	return NSStringFromClass([self class]);
 }
 

@@ -28,4 +28,7 @@
 - (BOOL)hasTextField;
 - (UITextField *)textField;
 
+- (BOOL)hasDatePicker;
+- (UIDatePicker *)datePicker;
+
 @end

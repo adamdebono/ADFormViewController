@@ -237,12 +237,15 @@
 			if ([cellObject type] == ADFormCellTypeText) {
 				if (last) {
 					last = NO;
-					[[(ADTextFieldCell *)[cellObject cell] textField] setReturnKeyType:[self returnKeyType]];
-					[[(ADTextFieldCell *)[cellObject cell] textField] setDelegate:self];
+					[[cellObject textField] setReturnKeyType:[self returnKeyType]];
 				} else {
-					[[(ADTextFieldCell *)[cellObject cell] textField] setReturnKeyType:UIReturnKeyNext];
-					[[(ADTextFieldCell *)[cellObject cell] textField] setDelegate:self];
+					[[cellObject textField] setReturnKeyType:UIReturnKeyNext];
 				}
+				
+				[[cellObject textField] setDelegate:self];
+				[[self selectableCellIndexPaths] insertObject:[NSIndexPath indexPathForRow:row inSection:section] atIndex:0];
+			} else if ([cellObject type] == ADFormCellTypeDate) {
+				[[cellObject textField] setDelegate:self];
 				[[self selectableCellIndexPaths] insertObject:[NSIndexPath indexPathForRow:row inSection:section] atIndex:0];
 			}
 		}];
@@ -296,6 +299,7 @@
 			case ADFormCellTypeButton:
 				[tableView deselectRowAtIndexPath:indexPath animated:YES];
 				break;
+			case ADFormCellTypeDate:
 			case ADFormCellTypeText:
 				[[(ADTextFieldCell *)[cellObject cell] textField] becomeFirstResponder];
 				break;

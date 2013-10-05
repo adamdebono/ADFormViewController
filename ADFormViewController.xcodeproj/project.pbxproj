@@ -11,6 +11,8 @@
 		8456993517FFB3FB003C08B6 /* UIImage+bundle.m in Sources */ = {isa = PBXBuildFile; fileRef = 8456993417FFB3FB003C08B6 /* UIImage+bundle.m */; };
 		8456993817FFBC76003C08B6 /* ADDateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8456993717FFBC76003C08B6 /* ADDateCell.m */; };
 		8456993A17FFBF44003C08B6 /* ADDateCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8456993917FFBF44003C08B6 /* ADDateCell.xib */; };
+		8456993D17FFC4A6003C08B6 /* ADOptionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8456993C17FFC4A6003C08B6 /* ADOptionCell.m */; };
+		8456994017FFC6F4003C08B6 /* ADFormOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8456993F17FFC6F4003C08B6 /* ADFormOptionsViewController.m */; };
 		A250657617535DAD0095B09D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A250657517535DAD0095B09D /* Foundation.framework */; };
 		A250657B17535DAD0095B09D /* ADFormViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A250657A17535DAD0095B09D /* ADFormViewController.h */; };
 		A250658417535DCC0095B09D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A250658317535DCC0095B09D /* UIKit.framework */; };
@@ -46,6 +48,10 @@
 		8456993617FFBC76003C08B6 /* ADDateCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADDateCell.h; sourceTree = "<group>"; };
 		8456993717FFBC76003C08B6 /* ADDateCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADDateCell.m; sourceTree = "<group>"; };
 		8456993917FFBF44003C08B6 /* ADDateCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ADDateCell.xib; sourceTree = "<group>"; };
+		8456993B17FFC4A6003C08B6 /* ADOptionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADOptionCell.h; sourceTree = "<group>"; };
+		8456993C17FFC4A6003C08B6 /* ADOptionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADOptionCell.m; sourceTree = "<group>"; };
+		8456993E17FFC6F4003C08B6 /* ADFormOptionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADFormOptionsViewController.h; sourceTree = "<group>"; };
+		8456993F17FFC6F4003C08B6 /* ADFormOptionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADFormOptionsViewController.m; sourceTree = "<group>"; };
 		A250657217535DAD0095B09D /* libADFormViewController.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libADFormViewController.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A250657517535DAD0095B09D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A250657917535DAD0095B09D /* ADFormViewController-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ADFormViewController-Prefix.pch"; sourceTree = "<group>"; };
@@ -133,6 +139,8 @@
 				A25065A4175362560095B09D /* ADFormViewConstants.h */,
 				8456993317FFB3FB003C08B6 /* UIImage+bundle.h */,
 				8456993417FFB3FB003C08B6 /* UIImage+bundle.m */,
+				8456993E17FFC6F4003C08B6 /* ADFormOptionsViewController.h */,
+				8456993F17FFC6F4003C08B6 /* ADFormOptionsViewController.m */,
 			);
 			path = ADFormViewController;
 			sourceTree = "<group>";
@@ -178,6 +186,8 @@
 				A25065A717536B5A0095B09D /* ADTableViewCell.m */,
 				A250659817535E9F0095B09D /* ADTextFieldCell.h */,
 				A250659917535E9F0095B09D /* ADTextFieldCell.m */,
+				8456993B17FFC4A6003C08B6 /* ADOptionCell.h */,
+				8456993C17FFC4A6003C08B6 /* ADOptionCell.m */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -280,12 +290,14 @@
 			files = (
 				A250659C17535F7D0095B09D /* ADTextFieldCell.m in Sources */,
 				A25065A0175361090095B09D /* ADSectionObject.m in Sources */,
+				8456994017FFC6F4003C08B6 /* ADFormOptionsViewController.m in Sources */,
 				8456993817FFBC76003C08B6 /* ADDateCell.m in Sources */,
 				A25065A3175361330095B09D /* ADCellObject.m in Sources */,
 				A25065A5175364E00095B09D /* ADFormViewController.m in Sources */,
 				A25065A817536B5A0095B09D /* ADTableViewCell.m in Sources */,
 				A25065CA1753873C0095B09D /* ADButtonCell.m in Sources */,
 				8456993517FFB3FB003C08B6 /* UIImage+bundle.m in Sources */,
+				8456993D17FFC4A6003C08B6 /* ADOptionCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

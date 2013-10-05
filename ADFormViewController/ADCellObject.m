@@ -10,6 +10,7 @@
 
 #import "ADButtonCell.h"
 #import "ADDateCell.h"
+#import "ADOptionCell.h"
 #import "ADTextFieldCell.h"
 
 @interface ADCellObject () <UITextFieldDelegate>
@@ -53,6 +54,12 @@
 				NSAssert([[self value] isKindOfClass:[NSDate class]], @"Date cell must have a date value");
 				[(ADDateCell *)[self cell] setDate:[self value]];
 				break;
+			case ADFormCellTypeSingleOption:
+				_cell = [[ADOptionCell alloc] init];
+				NSAssert([self options], @"Must provide options");
+				[self setValue:_value];
+				
+				break;
 			case ADFormCellTypeText:
 				_cell = [[ADTextFieldCell alloc] init];
 
@@ -83,6 +90,25 @@
 		[[self cell] setBackgroundColor:[UIColor whiteColor]];
 	} else {
 		[[self cell] setBackgroundColor:[UIColor colorWithWhite:0.9 alpha:1]];
+	}
+}
+
+- (void)setValue:(id)value {
+	_value = value;
+	
+	switch ([self type]) {
+		case ADFormCellTypeSingleOption:
+			if (_cell) {
+				if (value) {
+					NSAssert([[self value] isKindOfClass:[NSNumber class]], @"Option cell must have a number value");
+					[[_cell detailLabel] setText:[NSString stringWithFormat:@"%@", [[self options] objectAtIndex:[value integerValue]]]];
+				} else {
+					[[_cell detailLabel] setText:@"select"];
+				}
+			}
+			break;
+		default:
+			break;
 	}
 }
 

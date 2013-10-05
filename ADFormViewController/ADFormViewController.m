@@ -13,6 +13,7 @@
 
 #import "ADTableViewCell.h"
 #import "ADTextFieldCell.h"
+#import "ADFormOptionsViewController.h"
 
 #import "UIImage+bundle.h"
 
@@ -291,6 +292,8 @@
 #pragma mark Delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+	ADFormOptionsViewController *optionsViewController;
+	
 	ADCellObject *cellObject = [[[[self tableViewContent] objectAtIndex:[indexPath section]] cells] objectAtIndex:[indexPath row]];
 	if ([cellObject isEnabled] && (![cellObject cellPressedAction] || [cellObject cellPressedAction]())) {
 		switch ([cellObject type]) {
@@ -302,6 +305,15 @@
 			case ADFormCellTypeDate:
 			case ADFormCellTypeText:
 				[[(ADTextFieldCell *)[cellObject cell] textField] becomeFirstResponder];
+				break;
+			case ADFormCellTypeSingleOption:
+				[[self findFirstResponder] resignFirstResponder];
+				
+				optionsViewController = [[ADFormOptionsViewController alloc] initWithStyle:UITableViewStyleGrouped];
+				[optionsViewController setCellObject:cellObject];
+				
+				NSAssert([self navigationController], @"Options cells can only be used in a navigation controller context");
+				[[self navigationController] pushViewController:optionsViewController animated:YES];
 				break;
 		}
 	}

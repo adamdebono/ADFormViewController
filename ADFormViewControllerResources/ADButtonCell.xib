@@ -15,7 +15,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Done" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3">
-                        <rect key="frame" x="20" y="10" width="280" height="23"/>
+                        <rect key="frame" x="15" y="10" width="290" height="23"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -28,8 +28,8 @@
             </tableViewCellContentView>
             <constraints>
                 <constraint firstItem="3" firstAttribute="top" secondItem="2" secondAttribute="top" constant="10" id="Q6T-ro-2ax"/>
-                <constraint firstAttribute="trailing" secondItem="3" secondAttribute="trailing" constant="20" id="Rk7-EM-OjR"/>
-                <constraint firstItem="3" firstAttribute="leading" secondItem="2" secondAttribute="leading" constant="20" id="wDd-k3-Ncg"/>
+                <constraint firstAttribute="trailing" secondItem="3" secondAttribute="trailing" constant="15" id="Rk7-EM-OjR"/>
+                <constraint firstItem="3" firstAttribute="leading" secondItem="2" secondAttribute="leading" constant="15" id="wDd-k3-Ncg"/>
             </constraints>
             <connections>
                 <outlet property="label" destination="3" id="9"/>

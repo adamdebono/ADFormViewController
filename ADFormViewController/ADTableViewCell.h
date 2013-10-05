@@ -13,5 +13,6 @@
 + (NSString *)nibName;
 
 @property (nonatomic) IBOutlet UILabel *label;
+@property (nonatomic) IBOutlet UILabel *detailLabel;
 
 @end

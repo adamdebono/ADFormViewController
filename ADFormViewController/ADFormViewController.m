@@ -63,6 +63,10 @@
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
+	
+	if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0f) {
+		[[self tableView] setKeyboardDismissMode:UIScrollViewKeyboardDismissModeInteractive];
+	}
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -126,25 +130,32 @@
 
 #pragma mark - Cells
 
-- (void)setCellAtIndexPath:(NSIndexPath *)indexPath withIdentifier:(NSString *)identifer title:(NSString *)title type:(ADFormCellType)type {
-	ADCellObject *cellObject = [ADCellObject cell];
+- (void)addCellInSection:(NSUInteger)section withIdentifier:(NSString *)identifer title:(NSString *)title type:(ADFormCellType)type {
+	ADCellObject *cellObject = [ADCellObject cellWithType:type];
 	
 	[cellObject setIdentifier:identifer];
 	[cellObject setTitle:title];
-	[cellObject setType:type];
 	
-	[self setCellAtIndexPath:indexPath withCellObject:cellObject];
+	[self addCellInSection:section withCellObject:cellObject];
 }
 
-- (void)setCellAtIndexPath:(NSIndexPath *)indexPath withCellObject:(ADCellObject *)cellObject {
-	if ([[self tableViewContent] count] <= [indexPath section]) {
-		[self insertSectionAtIndex:[indexPath section] withHeaderTitle:nil andFooterTitle:nil];
+- (void)addCellInSection:(NSUInteger)section withCellObject:(ADCellObject *)cellObject {
+	if ([[self tableViewContent] count] <= section) {
+		[self insertSectionAtIndex:section withHeaderTitle:nil andFooterTitle:nil];
 	}
 	
-	ADSectionObject *sectionObject = [[self tableViewContent] objectAtIndex:[indexPath section]];
+	ADSectionObject *sectionObject = [[self tableViewContent] objectAtIndex:section];
 	[[sectionObject cells] addObject:cellObject];
 	
 	[self reload];
+}
+
+- (void)addCellsInSection:(NSUInteger)section withCellObjects:(NSArray *)cellObjects {
+	for (ADCellObject *cellObject in cellObjects) {
+		if ([cellObject isKindOfClass:[ADCellObject class]]) {
+			[self addCellInSection:section withCellObject:cellObject];
+		}
+	}
 }
 
 #pragma mark - Values
@@ -212,8 +223,9 @@
 	NSInteger i=0;
 	for (NSIndexPath *indexPath in [self textFieldCellIndexPaths]) {
 		ADCellObject *cellObject = [[[[self tableViewContent] objectAtIndex:[indexPath section]] cells] objectAtIndex:[indexPath row]];
-		ADTextFieldCell *cell = (ADTextFieldCell *)[cellObject cell];
-		[cell setTag:i];
+		//ADTextFieldCell *cell = (ADTextFieldCell *)[cellObject cell];
+		//[[cell textField] setTag:i];
+		[[cellObject textField] setTag:i];
 		
 		i++;
 	}

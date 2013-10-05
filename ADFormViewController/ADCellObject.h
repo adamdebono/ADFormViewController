@@ -13,7 +13,7 @@
 
 @interface ADCellObject : NSObject
 
-+ (ADCellObject *)cell;
++ (ADCellObject *)cellWithType:(ADFormCellType)type;
 
 @property (nonatomic) ADFormCellType type;
 @property (nonatomic) NSString *identifier;
@@ -24,5 +24,8 @@
 @property (nonatomic, copy) BOOL (^cellPressedAction)(void);
 
 @property (nonatomic, readonly) ADTableViewCell *cell;
+
+- (BOOL)hasTextField;
+- (UITextField *)textField;
 
 @end

@@ -21,8 +21,9 @@ typedef void(^ADDoneAction)(NSDictionary *values);
 - (void)addSectionWithHeaderTitle:(NSString *)headerTitle andFooterTitle:(NSString *)footerTitle;
 - (void)insertSectionAtIndex:(NSUInteger)index withHeaderTitle:(NSString *)headerTitle andFooterTitle:(NSString *)footerTitle;
 
-- (void)setCellAtIndexPath:(NSIndexPath *)indexPath withIdentifier:(NSString *)identifer title:(NSString *)title type:(ADFormCellType)type;
-- (void)setCellAtIndexPath:(NSIndexPath *)indexPath withCellObject:(ADCellObject *)cellObject;
+- (void)addCellInSection:(NSUInteger)section withIdentifier:(NSString *)identifer title:(NSString *)title type:(ADFormCellType)type;
+- (void)addCellInSection:(NSUInteger)section withCellObject:(ADCellObject *)cellObject;
+- (void)addCellsInSection:(NSUInteger)section withCellObjects:(NSArray *)cellObjects;
 
 - (id)valueForIdentifier:(NSString *)identifier;
 - (NSDictionary *)allValues;

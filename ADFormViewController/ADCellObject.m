@@ -18,12 +18,14 @@
 @implementation ADCellObject
 @synthesize cell = _cell;
 
-+ (ADCellObject *)cell {
-	return [[ADCellObject alloc] init];
++ (ADCellObject *)cellWithType:(ADFormCellType)type {
+	return [[ADCellObject alloc] initWithType:type];
 }
 
-- (id)init {
+- (id)initWithType:(ADFormCellType)type {
 	if (self = [super init]) {
+		_type = type;
+		
 		_identifier = nil;
 		_title = nil;
 		_value = nil;
@@ -54,6 +56,7 @@
 		}
 		
 		[[_cell label] setText:[self title]];
+		[self setEnabled:_enabled];
 	}
 	
 	return _cell;
@@ -63,13 +66,39 @@
 	return [[super description] stringByAppendingFormat:@" id: %@, value: %@", [self identifier], [self value]];
 }
 
+#pragma mark - Setters
+
 - (void)setEnabled:(BOOL)enabled {
 	_enabled = enabled;
 	
 	if (enabled) {
-		[[self cell] setBackgroundColor:[UIColor clearColor]];
+		[[self cell] setBackgroundColor:[UIColor whiteColor]];
 	} else {
-		[[self cell] setBackgroundColor:[[UIColor blackColor] colorWithAlphaComponent:0.05]];
+		[[self cell] setBackgroundColor:[UIColor colorWithWhite:0.9 alpha:1]];
+	}
+}
+
+#pragma mark - Text Field
+
+- (BOOL)hasTextField {
+	switch ([self type]) {
+		case ADFormCellTypeText:
+			return YES;
+			break;
+		default:
+			return NO;
+			break;
+	}
+}
+
+- (UITextField *)textField {
+	switch ([self type]) {
+		case ADFormCellTypeText:
+			return [(ADTextFieldCell *)[self cell] textField];
+			break;
+		default:
+			return nil;
+			break;
 	}
 }
 

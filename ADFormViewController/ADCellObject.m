@@ -103,9 +103,18 @@
 	_value = value;
 	
 	switch ([self type]) {
+		case ADFormCellTypeButton:
+		case ADFormCellTypeDoneButton:
+			break;
+		case ADFormCellTypeDate:
+			NSAssert([value isKindOfClass:[NSDate class]], @"Date cell must be given a date value");
+			if (_cell) {
+				[(ADDateCell *)[self cell] setDate:value];
+			}
+			break;
 		case ADFormCellTypeSingleOption:
 			if (_cell) {
-				if (value) {
+				if (value && (![value isKindOfClass:[NSString class]] || [value length] > 0)) {
 					if ([[self options] isKindOfClass:[NSArray class]]) {
 						//NSAssert([[self options] isKindOfClass:[NSArray class]], @"Number value must point to an array of options");
 						if ([value isKindOfClass:[NSNumber class]]) {
@@ -123,7 +132,13 @@
 				}
 			}
 			break;
-		default:
+		case ADFormCellTypeText:
+			if (!_value) {
+				_value = @"";
+			}
+			if (_cell) {
+				[[self textField] setText:[NSString stringWithFormat:@"%@", [self value]]];
+			}
 			break;
 	}
 }

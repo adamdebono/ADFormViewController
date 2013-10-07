@@ -62,13 +62,10 @@
 				_cell = [[ADOptionCell alloc] init];
 				NSAssert([self options], @"Must provide options");
 				[self setValue:_value];
-				
-				[[_cell textLabel] setFont:[UIFont systemFontOfSize:17]];
-				[[_cell detailLabel] setFont:[UIFont systemFontOfSize:14]];
 				break;
 			case ADFormCellTypeText:
 				_cell = [[ADTextFieldCell alloc] init];
-
+				
 				if (![self value]) {
 					_value = @"";
 				}
@@ -77,6 +74,7 @@
 		}
 		
 		[[_cell label] setText:[self title]];
+		[_cell setCellObject:self];
 		[self setEnabled:_enabled];
 	}
 	
@@ -100,46 +98,53 @@
 }
 
 - (void)setValue:(id)value {
+	[self setValue:value updateCell:YES];
+}
+
+- (void)setValue:(id)value updateCell:(BOOL)updateCell {
 	_value = value;
 	
-	switch ([self type]) {
-		case ADFormCellTypeButton:
-		case ADFormCellTypeDoneButton:
-			break;
-		case ADFormCellTypeDate:
-			NSAssert([value isKindOfClass:[NSDate class]], @"Date cell must be given a date value");
-			if (_cell) {
-				[(ADDateCell *)[self cell] setDate:value];
-			}
-			break;
-		case ADFormCellTypeSingleOption:
-			if (_cell) {
-				if (value && (![value isKindOfClass:[NSString class]] || [value length] > 0)) {
-					if ([[self options] isKindOfClass:[NSArray class]]) {
-						//NSAssert([[self options] isKindOfClass:[NSArray class]], @"Number value must point to an array of options");
-						if ([value isKindOfClass:[NSNumber class]]) {
-							_value = [NSString stringWithFormat:@"%@", [[self options] objectAtIndex:[value integerValue]]];
-						}
-						[[_cell detailLabel] setText:[self value]];
-					} else if ([[self options] isKindOfClass:[NSDictionary class]]) {
-						//NSAssert([[self options] isKindOfClass:[NSDictionary class]], @"String value must point to a dictionary of options");
-						[[_cell detailLabel] setText:[NSString stringWithFormat:@"%@", [[self options] objectForKey:value]]];
-					} else {
-						NSAssert(false, @"Option must be either array or dictionary");
-					}
-				} else {
-					[[_cell detailLabel] setText:@"select"];
+	if (updateCell) {
+		switch ([self type]) {
+			case ADFormCellTypeButton:
+			case ADFormCellTypeDoneButton:
+				break;
+			case ADFormCellTypeDate:
+				NSAssert([value isKindOfClass:[NSDate class]], @"Date cell must be given a date value");
+				if (_cell) {
+					[(ADDateCell *)[self cell] setDate:value];
 				}
-			}
-			break;
-		case ADFormCellTypeText:
-			if (!_value) {
-				_value = @"";
-			}
-			if (_cell) {
-				[[self textField] setText:[NSString stringWithFormat:@"%@", [self value]]];
-			}
-			break;
+				break;
+			case ADFormCellTypeSingleOption:
+				if (_cell) {
+					if (value && (![value isKindOfClass:[NSString class]] || [value length] > 0)) {
+						if ([[self options] isKindOfClass:[NSArray class]]) {
+							//NSAssert([[self options] isKindOfClass:[NSArray class]], @"Number value must point to an array of options");
+							if ([value isKindOfClass:[NSNumber class]]) {
+								_value = [NSString stringWithFormat:@"%@", [[self options] objectAtIndex:[value integerValue]]];
+							}
+							[[_cell detailLabel] setText:[self value]];
+						} else if ([[self options] isKindOfClass:[NSDictionary class]]) {
+							//NSAssert([[self options] isKindOfClass:[NSDictionary class]], @"String value must point to a dictionary of options");
+							//[[_cell detailLabel] setText:[NSString stringWithFormat:@"%@", [[self options] objectForKey:value]]];
+							[[_cell detailLabel] setText:[NSString stringWithFormat:@"%@", [[self options] objectForKey:value]]];
+						} else {
+							NSAssert(false, @"Option must be either array or dictionary");
+						}
+					} else {
+						[[_cell detailLabel] setText:@"select"];
+					}
+				}
+				break;
+			case ADFormCellTypeText:
+				if (!_value) {
+					_value = @"";
+				}
+				if (_cell) {
+					[[self textField] setText:[NSString stringWithFormat:@"%@", [self value]]];
+				}
+				break;
+		}
 	}
 }
 

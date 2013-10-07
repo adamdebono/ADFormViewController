@@ -8,9 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+@class ADCellObject;
+
 @interface ADTableViewCell : UITableViewCell
 
 + (NSString *)nibName;
+
+@property (nonatomic, weak) ADCellObject *cellObject;
 
 @property (nonatomic) IBOutlet UILabel *label;
 @property (nonatomic) IBOutlet UILabel *detailLabel;

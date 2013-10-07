@@ -88,32 +88,12 @@
 	}
 }
 
-- (BOOL)isCellAtIndexPathSelected:(NSIndexPath *)indexPath {
-	if ([[self cellObject] type] == ADFormCellTypeSingleOption) {
-		if (![[self cellObject] value]) {
-			return NO;
-		}
-		if ([[[self cellObject] options] isKindOfClass:[NSArray class]]) {
-			if ([[[[self cellObject] options] objectAtIndex:[indexPath row]] isEqualToString:[[self cellObject] value]]) {
-				return YES;
-			} else {
-				return NO;
-			}
-		} else if ([[[self cellObject] options] isKindOfClass:[NSDictionary class]]) {
-			NSString *value = [[self tableViewValues] objectAtIndex:[indexPath row]];
-			NSArray *keys = [[[self cellObject] options] allKeysForObject:value];
-			if ([[keys firstObject] isEqualToString:[[self cellObject] value]]) {
-				return YES;
-			}
-			return NO;
-		}
-	}
-	
-	return NO;
-}
-
 - (BOOL)isValueSelected:(NSString *)value {
-	return [[[self cellObject] value] isEqualToString:value];
+	if ([[[self cellObject] options] isKindOfClass:[NSDictionary class]]) {
+		return [[[[self cellObject] options] objectForKey:[[self cellObject] value]] isEqualToString:value];
+	} else {
+		return [[[self cellObject] value] isEqualToString:value];
+	}
 }
 
 #pragma mark - Table View Data Source
@@ -169,7 +149,8 @@
 	if ([[self cellObject] type] == ADFormCellTypeSingleOption) {
 		if ([self sections]) {
 			NSString *value = [[[self sections] objectAtIndex:[indexPath section]] objectAtIndex:[indexPath row]];
-			[[self cellObject] setValue:value];
+			NSArray *keys = [[[self cellObject] options] allKeysForObject:value];
+			[[self cellObject] setValue:[keys firstObject]];
 		} else if ([[[self cellObject] options] isKindOfClass:[NSArray class]]) {
 			[[self cellObject] setValue:@([indexPath row])];
 		} else if ([[[self cellObject] options] isKindOfClass:[NSDictionary class]]) {

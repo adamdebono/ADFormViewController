@@ -13,6 +13,10 @@
 - (id)init {
 	if (self = [super initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"option"]) {
 		[self setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+		
+		[[self textLabel] setFont:[UIFont systemFontOfSize:17]];
+		[[self detailLabel] setFont:[UIFont systemFontOfSize:14]];
+		[[self detailLabel] setTextColor:[UIColor blackColor]];
 	}
 	
 	return self;

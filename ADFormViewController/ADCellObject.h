@@ -19,6 +19,7 @@
 @property (nonatomic) NSString *identifier;
 @property (nonatomic) NSString *title;
 @property (nonatomic) id value;
+- (void)setValue:(id)value updateCell:(BOOL)updateCell;
 @property (nonatomic, getter = isEnabled) BOOL enabled;
 
 @property (nonatomic, copy) BOOL (^cellPressedAction)(void);

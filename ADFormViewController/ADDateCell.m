@@ -8,6 +8,8 @@
 
 #import "ADDateCell.h"
 
+#import "ADCellObject.h"
+
 @interface ADDateCell ()
 
 @property (nonatomic) IBOutlet UITextField *textField;
@@ -42,6 +44,8 @@
 	[df setTimeStyle:NSDateFormatterNoStyle];
 	
 	[[self textField] setText:[df stringFromDate:[[self datePicker] date]]];
+	
+	[[self cellObject] setValue:[[self datePicker] date] updateCell:NO];
 }
 
 @end

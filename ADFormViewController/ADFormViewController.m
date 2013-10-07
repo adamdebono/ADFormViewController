@@ -435,7 +435,7 @@
 	
 	NSIndexPath *indexPath = [[self selectableCellIndexPaths] objectAtIndex:[textField tag]];
 	ADCellObject *cellObject = [[[[self tableViewContent] objectAtIndex:[indexPath section]] cells] objectAtIndex:[indexPath row]];
-	[cellObject setValue:completeString];
+	[cellObject setValue:completeString updateCell:NO];
 	
 	return YES;
 }

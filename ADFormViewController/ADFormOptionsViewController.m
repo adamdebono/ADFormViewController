@@ -12,6 +12,12 @@
 
 @interface ADFormOptionsViewController ()
 
+@property (nonatomic) NSArray *sections;
+@property (nonatomic) NSArray *sectionTitles;
+@property (nonatomic) NSArray *sectionIndexes;
+@property (nonatomic) NSDictionary *sectionIndexMapping;
+@property (nonatomic) NSArray *tableViewValues;
+
 @end
 
 @implementation ADFormOptionsViewController
@@ -22,6 +28,64 @@
 	NSAssert([self cellObject], @"Must provide a cell object");
 	
 	[[self navigationItem] setTitle:[[self cellObject] title]];
+	
+	if ([[[self cellObject] options] isKindOfClass:[NSDictionary class]]) {
+		if ([[self cellObject] optionValueSortComparator]) {
+			_tableViewValues = [[[[self cellObject] options] allValues] sortedArrayUsingComparator:[[self cellObject] optionValueSortComparator]];
+		} else {
+			//_tableViewValues = [[[[self cellObject] options] allValues] sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
+			_tableViewValues = [[[[self cellObject] options] allValues] sortedArrayUsingComparator:^NSComparisonResult(NSString *obj1, NSString *obj2) {
+				return [obj1 compare:obj2 options:NSCaseInsensitiveSearch|NSDiacriticInsensitiveSearch|NSNumericSearch];
+			}];
+		}
+	}
+	
+	if ([[self cellObject] optionSectionTitleGetter]) {
+		NSMutableArray *sections = [NSMutableArray array];
+		NSMutableArray *sectionTitles = [NSMutableArray array];
+		NSMutableArray *currentSection;
+		NSString *lastSection = nil;
+		
+		if ([[[self cellObject] options] isKindOfClass:[NSDictionary class]]) {
+			for (NSString *value in [self tableViewValues]) {
+				NSString *sectionTitle = [[self cellObject] optionSectionTitleGetter](value);
+				if (![sectionTitle isEqualToString:lastSection]) {
+					lastSection = sectionTitle;
+					currentSection = [NSMutableArray array];
+					[sections addObject:currentSection];
+					
+					[sectionTitles addObject:sectionTitle];
+				}
+				
+				[currentSection addObject:value];
+			}
+		}
+		
+		_sections = sections;
+		_sectionTitles = sectionTitles;
+		
+		if ([[self cellObject] optionSectionIndexGetter]) {
+			NSMutableArray *sectionIndexes = [NSMutableArray array];
+			NSMutableDictionary *indexMapping = [NSMutableDictionary dictionary];
+			
+			NSInteger section = 0;
+			NSInteger i = 0;
+			for (NSString *sectionTitle in sectionTitles) {
+				NSString *index = [[self cellObject] optionSectionIndexGetter](sectionTitle);
+				if (![[sectionIndexes lastObject] isEqualToString:index]) {
+					[sectionIndexes addObject:index];
+					[indexMapping setValue:[NSString stringWithFormat:@"%i", section] forKey:[NSString stringWithFormat:@"%i", i]];
+					
+					i++;
+				}
+				
+				section++;
+			}
+			
+			_sectionIndexes = sectionIndexes;
+			_sectionIndexMapping = indexMapping;
+		}
+	}
 }
 
 - (BOOL)isCellAtIndexPathSelected:(NSIndexPath *)indexPath {
@@ -36,21 +100,34 @@
 				return NO;
 			}
 		} else if ([[[self cellObject] options] isKindOfClass:[NSDictionary class]]) {
-			if ([[[[[self cellObject] options] allKeys] objectAtIndex:[indexPath row]] isEqualToString:[[self cellObject] value]]) {
+			NSString *value = [[self tableViewValues] objectAtIndex:[indexPath row]];
+			NSArray *keys = [[[self cellObject] options] allKeysForObject:value];
+			if ([[keys firstObject] isEqualToString:[[self cellObject] value]]) {
 				return YES;
-			} else {
-				return NO;
 			}
+			return NO;
 		}
 	}
 	
 	return NO;
 }
 
+- (BOOL)isValueSelected:(NSString *)value {
+	return [[[self cellObject] value] isEqualToString:value];
+}
+
 #pragma mark - Table View Data Source
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+	return [self sections]?[[self sections] count]:1;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [[[self cellObject] options] count];
+    return [self sections]?[[[self sections] objectAtIndex:section] count]:[[[self cellObject] options] count];
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+	return [self sections]?[[self sectionTitles] objectAtIndex:section]:nil;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -60,14 +137,16 @@
 	}
     
 	id value;
-	if ([[[self cellObject] options] isKindOfClass:[NSArray class]]) {
+	if ([self sections]) {
+		value = [[[self sections] objectAtIndex:[indexPath section]] objectAtIndex:[indexPath row]];
+	} else if ([[[self cellObject] options] isKindOfClass:[NSArray class]]) {
 		value = [[[self cellObject] options] objectAtIndex:[indexPath row]];
 	} else {
-		value = [[[self cellObject] options] objectForKey:[[[[self cellObject] options] allKeys] objectAtIndex:[indexPath row]]];
+		value = [[self tableViewValues] objectAtIndex:[indexPath row]];
 	}
 	[[cell textLabel] setText:[NSString stringWithFormat:@"%@", value]];
 	
-	if ([self isCellAtIndexPathSelected:indexPath]) {
+	if ([self isValueSelected:value]) {
 		[cell setAccessoryType:UITableViewCellAccessoryCheckmark];
 	} else {
 		[cell setAccessoryType:UITableViewCellAccessoryNone];
@@ -76,14 +155,28 @@
     return cell;
 }
 
+- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
+	return [self sectionIndexes];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index {
+	return [[[self sectionIndexMapping] objectForKey:[NSString stringWithFormat:@"%i", index]] integerValue];
+}
+
 #pragma mark - Table View Delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	if ([[self cellObject] type] == ADFormCellTypeSingleOption) {
-		if ([[[self cellObject] options] isKindOfClass:[NSArray class]]) {
+		if ([self sections]) {
+			NSString *value = [[[self sections] objectAtIndex:[indexPath section]] objectAtIndex:[indexPath row]];
+			[[self cellObject] setValue:value];
+		} else if ([[[self cellObject] options] isKindOfClass:[NSArray class]]) {
 			[[self cellObject] setValue:@([indexPath row])];
 		} else if ([[[self cellObject] options] isKindOfClass:[NSDictionary class]]) {
-			[[self cellObject] setValue:[[[[self cellObject] options] allKeys] objectAtIndex:[indexPath row]]];
+			//[[self cellObject] setValue:[[[[self cellObject] options] allKeys] objectAtIndex:[indexPath row]]];
+			NSString *value = [[self tableViewValues] objectAtIndex:[indexPath row]];
+			NSArray *keys = [[[self cellObject] options] allKeysForObject:value];
+			[[self cellObject] setValue:[keys firstObject]];
 		}
 		
 		[[self navigationController] popViewControllerAnimated:YES];

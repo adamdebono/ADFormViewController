@@ -32,6 +32,10 @@
 		_title = nil;
 		_value = nil;
 		
+		_options = nil;
+		_optionValueSortComparator = NULL;
+		_optionSectionTitleGetter = NULL;
+		
 		_cellPressedAction = NULL;
 		_enabled = YES;
 	}

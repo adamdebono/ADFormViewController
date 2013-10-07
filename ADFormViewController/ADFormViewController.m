@@ -334,7 +334,7 @@
 			case ADFormCellTypeSingleOption:
 				[[self findFirstResponder] resignFirstResponder];
 				
-				optionsViewController = [[ADFormOptionsViewController alloc] initWithStyle:UITableViewStyleGrouped];
+				optionsViewController = [[ADFormOptionsViewController alloc] initWithStyle:UITableViewStylePlain];
 				[optionsViewController setCellObject:cellObject];
 				
 				NSAssert([self navigationController], @"Options cells can only be used in a navigation controller context");

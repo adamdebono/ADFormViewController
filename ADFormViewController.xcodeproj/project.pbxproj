@@ -7,25 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8456993217FFB2B3003C08B6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8456993117FFB2B3003C08B6 /* Images.xcassets */; };
 		8456993517FFB3FB003C08B6 /* UIImage+bundle.m in Sources */ = {isa = PBXBuildFile; fileRef = 8456993417FFB3FB003C08B6 /* UIImage+bundle.m */; };
 		8456993817FFBC76003C08B6 /* ADDateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8456993717FFBC76003C08B6 /* ADDateCell.m */; };
-		8456993A17FFBF44003C08B6 /* ADDateCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8456993917FFBF44003C08B6 /* ADDateCell.xib */; };
 		8456993D17FFC4A6003C08B6 /* ADOptionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8456993C17FFC4A6003C08B6 /* ADOptionCell.m */; };
 		8456994017FFC6F4003C08B6 /* ADFormOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8456993F17FFC6F4003C08B6 /* ADFormOptionsViewController.m */; };
 		A250657617535DAD0095B09D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A250657517535DAD0095B09D /* Foundation.framework */; };
 		A250657B17535DAD0095B09D /* ADFormViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A250657A17535DAD0095B09D /* ADFormViewController.h */; };
 		A250658417535DCC0095B09D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A250658317535DCC0095B09D /* UIKit.framework */; };
-		A250658B17535E7E0095B09D /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A250658A17535E7E0095B09D /* CoreFoundation.framework */; };
-		A250659117535E7E0095B09D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A250658F17535E7E0095B09D /* InfoPlist.strings */; };
-		A250659717535E950095B09D /* ADTextFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A250659617535E950095B09D /* ADTextFieldCell.xib */; };
 		A250659C17535F7D0095B09D /* ADTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A250659917535E9F0095B09D /* ADTextFieldCell.m */; };
 		A25065A0175361090095B09D /* ADSectionObject.m in Sources */ = {isa = PBXBuildFile; fileRef = A250659F175361090095B09D /* ADSectionObject.m */; };
 		A25065A3175361330095B09D /* ADCellObject.m in Sources */ = {isa = PBXBuildFile; fileRef = A25065A2175361330095B09D /* ADCellObject.m */; };
 		A25065A5175364E00095B09D /* ADFormViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A250657C17535DAD0095B09D /* ADFormViewController.m */; };
 		A25065A817536B5A0095B09D /* ADTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A25065A717536B5A0095B09D /* ADTableViewCell.m */; };
 		A25065CA1753873C0095B09D /* ADButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A25065C91753873C0095B09D /* ADButtonCell.m */; };
-		A25065CC175387680095B09D /* ADButtonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A25065CB175387680095B09D /* ADButtonCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -42,7 +36,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		8456993117FFB2B3003C08B6 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		664076D518B564870063CF45 /* arrow-backward.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow-backward.png"; sourceTree = "<group>"; };
+		664076D618B564870063CF45 /* arrow-backward@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow-backward@2x.png"; sourceTree = "<group>"; };
+		664076D918B5648E0063CF45 /* arrow-forward.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow-forward.png"; sourceTree = "<group>"; };
+		664076DA18B5648E0063CF45 /* arrow-forward@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow-forward@2x.png"; sourceTree = "<group>"; };
 		8456993317FFB3FB003C08B6 /* UIImage+bundle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+bundle.h"; sourceTree = "<group>"; };
 		8456993417FFB3FB003C08B6 /* UIImage+bundle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+bundle.m"; sourceTree = "<group>"; };
 		8456993617FFBC76003C08B6 /* ADDateCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADDateCell.h; sourceTree = "<group>"; };
@@ -58,11 +55,7 @@
 		A250657A17535DAD0095B09D /* ADFormViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ADFormViewController.h; sourceTree = "<group>"; };
 		A250657C17535DAD0095B09D /* ADFormViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ADFormViewController.m; sourceTree = "<group>"; };
 		A250658317535DCC0095B09D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		A250658917535E7E0095B09D /* ADFormViewControllerResources.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ADFormViewControllerResources.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		A250658A17535E7E0095B09D /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
-		A250658E17535E7E0095B09D /* ADFormViewControllerResources-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ADFormViewControllerResources-Info.plist"; sourceTree = "<group>"; };
-		A250659017535E7E0095B09D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		A250659217535E7E0095B09D /* ADFormViewControllerResources-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ADFormViewControllerResources-Prefix.pch"; sourceTree = "<group>"; };
 		A250659617535E950095B09D /* ADTextFieldCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ADTextFieldCell.xib; sourceTree = "<group>"; };
 		A250659817535E9F0095B09D /* ADTextFieldCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ADTextFieldCell.h; sourceTree = "<group>"; };
 		A250659917535E9F0095B09D /* ADTextFieldCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ADTextFieldCell.m; sourceTree = "<group>"; };
@@ -88,22 +81,43 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A250658617535E7E0095B09D /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A250658B17535E7E0095B09D /* CoreFoundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		664076D218B564280063CF45 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				664076D418B5645D0063CF45 /* images */,
+				664076D318B564460063CF45 /* xib */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		664076D318B564460063CF45 /* xib */ = {
+			isa = PBXGroup;
+			children = (
+				A25065CB175387680095B09D /* ADButtonCell.xib */,
+				8456993917FFBF44003C08B6 /* ADDateCell.xib */,
+				A250659617535E950095B09D /* ADTextFieldCell.xib */,
+			);
+			path = xib;
+			sourceTree = "<group>";
+		};
+		664076D418B5645D0063CF45 /* images */ = {
+			isa = PBXGroup;
+			children = (
+				664076D518B564870063CF45 /* arrow-backward.png */,
+				664076D618B564870063CF45 /* arrow-backward@2x.png */,
+				664076D918B5648E0063CF45 /* arrow-forward.png */,
+				664076DA18B5648E0063CF45 /* arrow-forward@2x.png */,
+			);
+			path = images;
+			sourceTree = "<group>";
+		};
 		A250656917535DAD0095B09D = {
 			isa = PBXGroup;
 			children = (
 				A250657717535DAD0095B09D /* ADFormViewController */,
-				A250658C17535E7E0095B09D /* ADFormViewControllerResources */,
 				A250657417535DAD0095B09D /* Frameworks */,
 				A250657317535DAD0095B09D /* Products */,
 			);
@@ -113,7 +127,6 @@
 			isa = PBXGroup;
 			children = (
 				A250657217535DAD0095B09D /* libADFormViewController.a */,
-				A250658917535E7E0095B09D /* ADFormViewControllerResources.bundle */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -131,6 +144,7 @@
 		A250657717535DAD0095B09D /* ADFormViewController */ = {
 			isa = PBXGroup;
 			children = (
+				664076D218B564280063CF45 /* Resources */,
 				A250659D175360D70095B09D /* Objects */,
 				A250659A17535EA30095B09D /* Cells */,
 				A250657A17535DAD0095B09D /* ADFormViewController.h */,
@@ -149,28 +163,6 @@
 			isa = PBXGroup;
 			children = (
 				A250657917535DAD0095B09D /* ADFormViewController-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		A250658C17535E7E0095B09D /* ADFormViewControllerResources */ = {
-			isa = PBXGroup;
-			children = (
-				A25065CB175387680095B09D /* ADButtonCell.xib */,
-				8456993917FFBF44003C08B6 /* ADDateCell.xib */,
-				A250659617535E950095B09D /* ADTextFieldCell.xib */,
-				A250658D17535E7E0095B09D /* Supporting Files */,
-				8456993117FFB2B3003C08B6 /* Images.xcassets */,
-			);
-			path = ADFormViewControllerResources;
-			sourceTree = "<group>";
-		};
-		A250658D17535E7E0095B09D /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				A250658E17535E7E0095B09D /* ADFormViewControllerResources-Info.plist */,
-				A250658F17535E7E0095B09D /* InfoPlist.strings */,
-				A250659217535E7E0095B09D /* ADFormViewControllerResources-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -223,23 +215,6 @@
 			productReference = A250657217535DAD0095B09D /* libADFormViewController.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		A250658817535E7E0095B09D /* ADFormViewControllerResources */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = A250659317535E7E0095B09D /* Build configuration list for PBXNativeTarget "ADFormViewControllerResources" */;
-			buildPhases = (
-				A250658517535E7E0095B09D /* Sources */,
-				A250658617535E7E0095B09D /* Frameworks */,
-				A250658717535E7E0095B09D /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = ADFormViewControllerResources;
-			productName = ADFormViewControllerResources;
-			productReference = A250658917535E7E0095B09D /* ADFormViewControllerResources.bundle */;
-			productType = "com.apple.product-type.bundle";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -263,25 +238,9 @@
 			projectRoot = "";
 			targets = (
 				A250657117535DAD0095B09D /* ADFormViewController */,
-				A250658817535E7E0095B09D /* ADFormViewControllerResources */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXResourcesBuildPhase section */
-		A250658717535E7E0095B09D /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				8456993A17FFBF44003C08B6 /* ADDateCell.xib in Resources */,
-				A250659117535E7E0095B09D /* InfoPlist.strings in Resources */,
-				8456993217FFB2B3003C08B6 /* Images.xcassets in Resources */,
-				A250659717535E950095B09D /* ADTextFieldCell.xib in Resources */,
-				A25065CC175387680095B09D /* ADButtonCell.xib in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		A250656E17535DAD0095B09D /* Sources */ = {
@@ -301,25 +260,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A250658517535E7E0095B09D /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		A250658F17535E7E0095B09D /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A250659017535E7E0095B09D /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		A250657E17535DAD0095B09D /* Debug */ = {
@@ -399,43 +340,6 @@
 			};
 			name = Release;
 		};
-		A250659417535E7E0095B09D /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "ADFormViewControllerResources/ADFormViewControllerResources-Prefix.pch";
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				INFOPLIST_FILE = "ADFormViewControllerResources/ADFormViewControllerResources-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				WRAPPER_EXTENSION = bundle;
-			};
-			name = Debug;
-		};
-		A250659517535E7E0095B09D /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				COMBINE_HIDPI_IMAGES = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "ADFormViewControllerResources/ADFormViewControllerResources-Prefix.pch";
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				INFOPLIST_FILE = "ADFormViewControllerResources/ADFormViewControllerResources-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				WRAPPER_EXTENSION = bundle;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -453,15 +357,6 @@
 			buildConfigurations = (
 				A250658117535DAD0095B09D /* Debug */,
 				A250658217535DAD0095B09D /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		A250659317535E7E0095B09D /* Build configuration list for PBXNativeTarget "ADFormViewControllerResources" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				A250659417535E7E0095B09D /* Debug */,
-				A250659517535E7E0095B09D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

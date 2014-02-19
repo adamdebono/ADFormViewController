@@ -41,7 +41,7 @@
 		664076D918B5648E0063CF45 /* arrow-forward.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow-forward.png"; sourceTree = "<group>"; };
 		664076DA18B5648E0063CF45 /* arrow-forward@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow-forward@2x.png"; sourceTree = "<group>"; };
 		66F2C16118B5657700C90545 /* ADFormViewController.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ADFormViewController.podspec; sourceTree = "<group>"; };
-		66F2C16218B5683900C90545 /* Readme.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Readme.md; sourceTree = "<group>"; };
+		66F2C16218B5683900C90545 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		8456993317FFB3FB003C08B6 /* UIImage+bundle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+bundle.h"; sourceTree = "<group>"; };
 		8456993417FFB3FB003C08B6 /* UIImage+bundle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+bundle.m"; sourceTree = "<group>"; };
 		8456993617FFBC76003C08B6 /* ADDateCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADDateCell.h; sourceTree = "<group>"; };
@@ -119,7 +119,7 @@
 		A250656917535DAD0095B09D = {
 			isa = PBXGroup;
 			children = (
-				66F2C16218B5683900C90545 /* Readme.md */,
+				66F2C16218B5683900C90545 /* README.md */,
 				66F2C16118B5657700C90545 /* ADFormViewController.podspec */,
 				A250657717535DAD0095B09D /* ADFormViewController */,
 				A250657417535DAD0095B09D /* Frameworks */,

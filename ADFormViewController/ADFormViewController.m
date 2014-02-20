@@ -360,6 +360,7 @@
 				[[self findFirstResponder] resignFirstResponder];
 				if ([[cellObject cell] frame].size.height != 44) {
 					[tableView deselectRowAtIndexPath:indexPath animated:YES];
+					[cellObject didDeselect];
 				}
 				break;
 			case ADFormCellTypeTextArea:

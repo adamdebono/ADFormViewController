@@ -12,6 +12,7 @@
 #import "ADDateCell.h"
 #import "ADOptionCell.h"
 #import "ADTextFieldCell.h"
+#import "ADTextAreaCell.h"
 
 @interface ADCellObject () <UITextFieldDelegate>
 
@@ -71,9 +72,19 @@
 				}
 				[[self textField] setText:[NSString stringWithFormat:@"%@", [self value]]];
 				break;
+			case ADFormCellTypeTextArea:
+				_cell = [[ADTextAreaCell alloc] init];
+				
+				if (![self value]) {
+					_value = @"";
+				}
+				[[self textView] setText:[NSString stringWithFormat:@"%@", [self value]]];
+				break;
 		}
 		
-		[[_cell label] setText:[self title]];
+		if ([_cell label]) {
+			[[_cell label] setText:[self title]];
+		}
 		[_cell setCellObject:self];
 		[self setEnabled:_enabled];
 	}
@@ -144,6 +155,14 @@
 					[[self textField] setText:[NSString stringWithFormat:@"%@", [self value]]];
 				}
 				break;
+			case ADFormCellTypeTextArea:
+				if (!_value) {
+					_value = @"";
+				}
+				if (_cell) {
+					[[self textView] setText:[NSString stringWithFormat:@"%@", [self value]]];
+				}
+				break;
 		}
 	}
 }
@@ -153,6 +172,7 @@
 - (BOOL)hasTextField {
 	switch ([self type]) {
 		case ADFormCellTypeText:
+		case ADFormCellTypeDate:
 			return YES;
 			break;
 		default:
@@ -166,6 +186,30 @@
 		case ADFormCellTypeText:
 		case ADFormCellTypeDate:
 			return [(ADTextFieldCell *)[self cell] textField];
+			break;
+		default:
+			return nil;
+			break;
+	}
+}
+
+#pragma mark - Text View
+
+- (BOOL)hasTextView {
+	switch ([self type]) {
+		case ADFormCellTypeTextArea:
+			return YES;
+			break;
+		default:
+			return NO;
+			break;
+	}
+}
+
+- (UITextView *)textView {
+	switch ([self type]) {
+		case ADFormCellTypeTextArea:
+			return [(ADTextAreaCell *)[self cell] textView];
 			break;
 		default:
 			return nil;
@@ -195,6 +239,18 @@
 			return nil;
 			break;
 	}
+}
+
+#pragma mark - Cell Size
+
+- (CGFloat)cellHeight {
+	if ([self type] == ADFormCellTypeTextArea) {
+		[[self textView] setText:[self value]];
+		CGSize size = [[self textView] sizeThatFits:CGSizeMake([[self textView] frame].size.width, FLT_MAX)];
+		return size.height + 1;
+	}
+	
+	return UITableViewAutomaticDimension;
 }
 
 @end

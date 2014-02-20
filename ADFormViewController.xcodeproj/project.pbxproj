@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		66F2C17118B5860100C90545 /* ADTextAreaCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 66F2C17018B5860100C90545 /* ADTextAreaCell.m */; };
 		8456993517FFB3FB003C08B6 /* UIImage+bundle.m in Sources */ = {isa = PBXBuildFile; fileRef = 8456993417FFB3FB003C08B6 /* UIImage+bundle.m */; };
 		8456993817FFBC76003C08B6 /* ADDateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8456993717FFBC76003C08B6 /* ADDateCell.m */; };
 		8456993D17FFC4A6003C08B6 /* ADOptionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8456993C17FFC4A6003C08B6 /* ADOptionCell.m */; };
@@ -42,6 +43,9 @@
 		664076DA18B5648E0063CF45 /* arrow-forward@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow-forward@2x.png"; sourceTree = "<group>"; };
 		66F2C16118B5657700C90545 /* ADFormViewController.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ADFormViewController.podspec; sourceTree = "<group>"; };
 		66F2C16218B5683900C90545 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		66F2C16F18B5860100C90545 /* ADTextAreaCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADTextAreaCell.h; sourceTree = "<group>"; };
+		66F2C17018B5860100C90545 /* ADTextAreaCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADTextAreaCell.m; sourceTree = "<group>"; };
+		66F2C17218B5860700C90545 /* ADTextAreaCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ADTextAreaCell.xib; sourceTree = "<group>"; };
 		8456993317FFB3FB003C08B6 /* UIImage+bundle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+bundle.h"; sourceTree = "<group>"; };
 		8456993417FFB3FB003C08B6 /* UIImage+bundle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+bundle.m"; sourceTree = "<group>"; };
 		8456993617FFBC76003C08B6 /* ADDateCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADDateCell.h; sourceTree = "<group>"; };
@@ -101,6 +105,7 @@
 				A25065CB175387680095B09D /* ADButtonCell.xib */,
 				8456993917FFBF44003C08B6 /* ADDateCell.xib */,
 				A250659617535E950095B09D /* ADTextFieldCell.xib */,
+				66F2C17218B5860700C90545 /* ADTextAreaCell.xib */,
 			);
 			path = xib;
 			sourceTree = "<group>";
@@ -174,6 +179,8 @@
 		A250659A17535EA30095B09D /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				66F2C16F18B5860100C90545 /* ADTextAreaCell.h */,
+				66F2C17018B5860100C90545 /* ADTextAreaCell.m */,
 				A25065C81753873C0095B09D /* ADButtonCell.h */,
 				A25065C91753873C0095B09D /* ADButtonCell.m */,
 				8456993617FFBC76003C08B6 /* ADDateCell.h */,
@@ -257,6 +264,7 @@
 				8456993817FFBC76003C08B6 /* ADDateCell.m in Sources */,
 				A25065A3175361330095B09D /* ADCellObject.m in Sources */,
 				A25065A5175364E00095B09D /* ADFormViewController.m in Sources */,
+				66F2C17118B5860100C90545 /* ADTextAreaCell.m in Sources */,
 				A25065A817536B5A0095B09D /* ADTableViewCell.m in Sources */,
 				A25065CA1753873C0095B09D /* ADButtonCell.m in Sources */,
 				8456993517FFB3FB003C08B6 /* UIImage+bundle.m in Sources */,

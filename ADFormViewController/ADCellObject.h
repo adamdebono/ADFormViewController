@@ -33,7 +33,12 @@
 - (BOOL)hasTextField;
 - (UITextField *)textField;
 
+- (BOOL)hasTextView;
+- (UITextView *)textView;
+
 - (BOOL)hasDatePicker;
 - (UIDatePicker *)datePicker;
+
+- (CGFloat)cellHeight;
 
 @end

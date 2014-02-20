@@ -17,7 +17,7 @@
 
 #import "UIImage+bundle.h"
 
-@interface ADFormViewController () <UITextFieldDelegate>
+@interface ADFormViewController () <UITextFieldDelegate, UITextViewDelegate>
 
 @property (nonatomic) NSMutableArray *tableViewContent;
 @property (nonatomic) NSMutableArray *selectableCellIndexPaths;
@@ -273,6 +273,9 @@
 			} else if ([cellObject type] == ADFormCellTypeDate) {
 				[[cellObject textField] setDelegate:self];
 				[[self selectableCellIndexPaths] insertObject:[NSIndexPath indexPathForRow:row inSection:section] atIndex:0];
+			} else if ([cellObject type] == ADFormCellTypeTextArea) {
+				[[cellObject textView] setDelegate:self];
+				[[self selectableCellIndexPaths] insertObject:[NSIndexPath indexPathForRow:row inSection:section] atIndex:0];
 			}
 		}];
 	}];
@@ -282,7 +285,11 @@
 		ADCellObject *cellObject = [[[[self tableViewContent] objectAtIndex:[indexPath section]] cells] objectAtIndex:[indexPath row]];
 		//ADTextFieldCell *cell = (ADTextFieldCell *)[cellObject cell];
 		//[[cell textField] setTag:i];
-		[[cellObject textField] setTag:i];
+		if ([cellObject hasTextField]) {
+			[[cellObject textField] setTag:i];
+		} else if ([cellObject hasTextView]) {
+			[[cellObject textView] setTag:i];
+		}
 		
 		i++;
 	}
@@ -314,6 +321,16 @@
 	return [cellObject cell];
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+	ADCellObject *cellObject = [[[[self tableViewContent] objectAtIndex:[indexPath section]] cells] objectAtIndex:[indexPath row]];
+	
+	CGFloat height = [cellObject cellHeight];
+	
+	//	NSLog(@"%@ -> %f", indexPath, height);
+	
+	return height;
+}
+
 #pragma mark Delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -329,7 +346,7 @@
 				break;
 			case ADFormCellTypeDate:
 			case ADFormCellTypeText:
-				[[(ADTextFieldCell *)[cellObject cell] textField] becomeFirstResponder];
+				[[cellObject textField] becomeFirstResponder];
 				break;
 			case ADFormCellTypeSingleOption:
 				[[self findFirstResponder] resignFirstResponder];
@@ -340,11 +357,13 @@
 				NSAssert([self navigationController], @"Options cells can only be used in a navigation controller context");
 				[[self navigationController] pushViewController:optionsViewController animated:YES];
 				break;
+			case ADFormCellTypeTextArea:
+				[[cellObject textView] becomeFirstResponder];
 		}
 	}
 }
 
-#pragma mark - Text Field
+#pragma mark - Text Fields & Views
 
 - (UIView *)findFirstResponder {
 	return [self findFirstResponderForView:[self view]];
@@ -367,13 +386,13 @@
 }
 
 - (BOOL)hasPreviousCell {
-	UITextField *textField = (UITextField *)[self findFirstResponder];
-	return [textField tag] > 1;
+	id field = [self findFirstResponder];
+	return [field tag] > 0;
 }
 
 - (BOOL)hasNextCell {
-	UITextField *textField = (UITextField *)[self findFirstResponder];
-	return [textField tag] < [[self selectableCellIndexPaths] count] - 1;
+	id field = [self findFirstResponder];
+	return [field tag] < [[self selectableCellIndexPaths] count] - 1;
 }
 
 - (void)previousCell {
@@ -381,8 +400,8 @@
 		return;
 	}
 	
-	UITextField *textField = (UITextField *)[self findFirstResponder];
-	[self selectCellWithTag:[textField tag]-1];
+	id field = [self findFirstResponder];
+	[self selectCellWithTag:[field tag]-1];
 }
 
 - (void)nextCell {
@@ -390,22 +409,26 @@
 		return;
 	}
 	
-	UITextField *textField = (UITextField *)[self findFirstResponder];
-	[self selectCellWithTag:[textField tag]+1];
+	id field = [self findFirstResponder];
+	[self selectCellWithTag:[field tag]+1];
 }
 
 - (void)selectCellWithTag:(NSUInteger)tag {
 	NSIndexPath *indexPath = [[self selectableCellIndexPaths] objectAtIndex:tag];
-		
+	
 	ADCellObject *cellObject = [[[[self tableViewContent] objectAtIndex:[indexPath section]] cells] objectAtIndex:[indexPath row]];
-	[[(ADTextFieldCell *)[cellObject cell] textField] becomeFirstResponder];
+	if ([cellObject hasTextField]) {
+		[[cellObject textField] becomeFirstResponder];
+	} else if ([cellObject hasTextView]) {
+		[[cellObject textView] becomeFirstResponder];
+	}
 }
 
 - (void)closeKeyboard {
 	[[self findFirstResponder] resignFirstResponder];
 }
 
-#pragma mark Delegate
+#pragma mark Text Field Delegate
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
 	NSIndexPath *indexPath = [[self selectableCellIndexPaths] objectAtIndex:[textField tag]];
@@ -448,6 +471,38 @@
 	}
 	
 	return YES;
+}
+
+#pragma mark Text View Delegate
+
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
+	NSIndexPath *indexPath = [[self selectableCellIndexPaths] objectAtIndex:[textView tag]];
+	ADCellObject *cellObject = [[[[self tableViewContent] objectAtIndex:[indexPath section]] cells] objectAtIndex:[indexPath row]];
+	
+	if ([self isFormEditingEnabled] && [cellObject isEnabled]) {
+		if ([self showsKeyboardToolbar]) {
+			[[cellObject textView] setInputAccessoryView:[self keyboardToolbar]];
+		}
+		
+		return YES;
+	}
+	
+	return NO;
+}
+
+- (void)textViewDidBeginEditing:(UITextView *)textView {
+	[[self toolbarPrevButton] setEnabled:[self hasPreviousCell]];
+	[[self toolbarNextButton] setEnabled:[self hasNextCell]];
+}
+
+- (void)textViewDidChange:(UITextView *)textView {
+	NSIndexPath *indexPath = [[self selectableCellIndexPaths] objectAtIndex:[textView tag]];
+	ADCellObject *cellObject = [[[[self tableViewContent] objectAtIndex:[indexPath section]] cells] objectAtIndex:[indexPath row]];
+	[cellObject setValue:[textView text] updateCell:NO];
+	
+	[[self tableView] beginUpdates];
+	[[self tableView] endUpdates];
+	[[cellObject textView] becomeFirstResponder];
 }
 
 @end

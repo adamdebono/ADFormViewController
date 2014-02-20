@@ -24,11 +24,15 @@
 
 @property (nonatomic, copy) BOOL (^cellPressedAction)(void);
 @property (nonatomic) id options;
+@property (nonatomic) NSArray *optionSectionTitles;
 @property (nonatomic, copy) NSComparator optionValueSortComparator;
 @property (nonatomic, copy) NSString *(^optionSectionTitleGetter)(NSString *value);
 @property (nonatomic, copy) NSString *(^optionSectionIndexGetter)(NSString *sectionTitle);
 
 @property (nonatomic, readonly) ADTableViewCell *cell;
+
+- (void)didSelect;
+- (void)didDeselect;
 
 - (BOOL)hasTextField;
 - (UITextField *)textField;

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		66F2C17118B5860100C90545 /* ADTextAreaCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 66F2C17018B5860100C90545 /* ADTextAreaCell.m */; };
+		66F2C18018B5B3A100C90545 /* ADPickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 66F2C17F18B5B3A100C90545 /* ADPickerCell.m */; };
 		8456993517FFB3FB003C08B6 /* UIImage+bundle.m in Sources */ = {isa = PBXBuildFile; fileRef = 8456993417FFB3FB003C08B6 /* UIImage+bundle.m */; };
 		8456993817FFBC76003C08B6 /* ADDateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8456993717FFBC76003C08B6 /* ADDateCell.m */; };
 		8456993D17FFC4A6003C08B6 /* ADOptionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8456993C17FFC4A6003C08B6 /* ADOptionCell.m */; };
@@ -46,6 +47,9 @@
 		66F2C16F18B5860100C90545 /* ADTextAreaCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADTextAreaCell.h; sourceTree = "<group>"; };
 		66F2C17018B5860100C90545 /* ADTextAreaCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADTextAreaCell.m; sourceTree = "<group>"; };
 		66F2C17218B5860700C90545 /* ADTextAreaCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ADTextAreaCell.xib; sourceTree = "<group>"; };
+		66F2C17D18B5B39900C90545 /* ADPickerCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ADPickerCell.xib; sourceTree = "<group>"; };
+		66F2C17E18B5B3A100C90545 /* ADPickerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADPickerCell.h; sourceTree = "<group>"; };
+		66F2C17F18B5B3A100C90545 /* ADPickerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADPickerCell.m; sourceTree = "<group>"; };
 		8456993317FFB3FB003C08B6 /* UIImage+bundle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+bundle.h"; sourceTree = "<group>"; };
 		8456993417FFB3FB003C08B6 /* UIImage+bundle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+bundle.m"; sourceTree = "<group>"; };
 		8456993617FFBC76003C08B6 /* ADDateCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADDateCell.h; sourceTree = "<group>"; };
@@ -106,6 +110,7 @@
 				8456993917FFBF44003C08B6 /* ADDateCell.xib */,
 				A250659617535E950095B09D /* ADTextFieldCell.xib */,
 				66F2C17218B5860700C90545 /* ADTextAreaCell.xib */,
+				66F2C17D18B5B39900C90545 /* ADPickerCell.xib */,
 			);
 			path = xib;
 			sourceTree = "<group>";
@@ -179,6 +184,8 @@
 		A250659A17535EA30095B09D /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				66F2C17E18B5B3A100C90545 /* ADPickerCell.h */,
+				66F2C17F18B5B3A100C90545 /* ADPickerCell.m */,
 				66F2C16F18B5860100C90545 /* ADTextAreaCell.h */,
 				66F2C17018B5860100C90545 /* ADTextAreaCell.m */,
 				A25065C81753873C0095B09D /* ADButtonCell.h */,
@@ -258,6 +265,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				66F2C18018B5B3A100C90545 /* ADPickerCell.m in Sources */,
 				A250659C17535F7D0095B09D /* ADTextFieldCell.m in Sources */,
 				A25065A0175361090095B09D /* ADSectionObject.m in Sources */,
 				8456994017FFC6F4003C08B6 /* ADFormOptionsViewController.m in Sources */,

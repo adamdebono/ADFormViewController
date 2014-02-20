@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="201" id="ljz-Qf-jZC" customClass="ADPickerCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="201"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ljz-Qf-jZC" id="fv1-lT-kcv">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fzO-sh-KJh">
+                        <rect key="frame" x="15" y="10" width="139" height="21"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" id="dcf-Dj-9UW"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </label>
+                    <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Some Text in the field" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="d5B-Js-PQZ">
+                        <rect key="frame" x="162" y="10" width="143" height="21"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" id="27p-YF-32a"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits"/>
+                    </textField>
+                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uUq-jr-wuD">
+                        <rect key="frame" x="0.0" y="39" width="320" height="162"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                    </pickerView>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="d5B-Js-PQZ" secondAttribute="trailing" constant="15" id="5yO-8t-pmO"/>
+                    <constraint firstItem="uUq-jr-wuD" firstAttribute="leading" secondItem="fv1-lT-kcv" secondAttribute="leading" id="DcC-YM-NSh"/>
+                    <constraint firstItem="uUq-jr-wuD" firstAttribute="top" secondItem="fzO-sh-KJh" secondAttribute="bottom" constant="8" id="GUm-tL-p3M"/>
+                    <constraint firstItem="fzO-sh-KJh" firstAttribute="top" secondItem="fv1-lT-kcv" secondAttribute="top" constant="10" id="KeF-hi-M3X"/>
+                    <constraint firstItem="fzO-sh-KJh" firstAttribute="top" secondItem="d5B-Js-PQZ" secondAttribute="top" id="VEa-uS-wQE"/>
+                    <constraint firstItem="fzO-sh-KJh" firstAttribute="bottom" secondItem="d5B-Js-PQZ" secondAttribute="bottom" id="aui-IA-aRY"/>
+                    <constraint firstItem="d5B-Js-PQZ" firstAttribute="leading" secondItem="fzO-sh-KJh" secondAttribute="trailing" constant="8" id="n8y-ZA-4jl"/>
+                    <constraint firstAttribute="trailing" secondItem="uUq-jr-wuD" secondAttribute="trailing" id="sdM-EG-q9D"/>
+                    <constraint firstItem="fzO-sh-KJh" firstAttribute="leading" secondItem="fv1-lT-kcv" secondAttribute="leading" constant="15" id="xzq-5k-XGq"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="label" destination="fzO-sh-KJh" id="39N-cd-mF3"/>
+                <outlet property="leadingConstraint" destination="xzq-5k-XGq" id="wQU-E8-J5R"/>
+                <outlet property="picker" destination="uUq-jr-wuD" id="SVE-5N-Bbj"/>
+                <outlet property="textField" destination="d5B-Js-PQZ" id="WLH-Jj-Meb"/>
+                <outlet property="trailingConstraint" destination="5yO-8t-pmO" id="Fk1-pS-Fdp"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+</document>

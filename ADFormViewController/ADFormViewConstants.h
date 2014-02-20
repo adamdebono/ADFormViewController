@@ -14,8 +14,11 @@ typedef NS_ENUM(NSInteger, ADFormCellType) {
 	ADFormCellTypeDate,
 	ADFormCellTypeDoneButton,
 	ADFormCellTypeSingleOption,
+	ADFormCellTypePicker,
 	ADFormCellTypeText,
 	ADFormCellTypeTextArea
 };
+
+static NSString *const ADFormCellDidSelect = @"ADFormCellDidSelect";
 
 #endif

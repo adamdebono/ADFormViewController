@@ -326,8 +326,6 @@
 	
 	CGFloat height = [cellObject cellHeight];
 	
-	//	NSLog(@"%@ -> %f", indexPath, height);
-	
 	return height;
 }
 
@@ -337,6 +335,7 @@
 	ADFormOptionsViewController *optionsViewController;
 	
 	ADCellObject *cellObject = [[[[self tableViewContent] objectAtIndex:[indexPath section]] cells] objectAtIndex:[indexPath row]];
+	[cellObject didSelect];
 	if ([cellObject isEnabled] && (![cellObject cellPressedAction] || [cellObject cellPressedAction]())) {
 		switch ([cellObject type]) {
 			case ADFormCellTypeDoneButton:
@@ -357,10 +356,21 @@
 				NSAssert([self navigationController], @"Options cells can only be used in a navigation controller context");
 				[[self navigationController] pushViewController:optionsViewController animated:YES];
 				break;
+			case ADFormCellTypePicker:
+				[[self findFirstResponder] resignFirstResponder];
+				if ([[cellObject cell] frame].size.height != 44) {
+					[tableView deselectRowAtIndexPath:indexPath animated:YES];
+				}
+				break;
 			case ADFormCellTypeTextArea:
 				[[cellObject textView] becomeFirstResponder];
+				break;
 		}
 	}
+	
+	//update row heights
+	[tableView beginUpdates];
+	[tableView endUpdates];
 }
 
 #pragma mark - Text Fields & Views
@@ -434,6 +444,11 @@
 	NSIndexPath *indexPath = [[self selectableCellIndexPaths] objectAtIndex:[textField tag]];
 	ADCellObject *cellObject = [[[[self tableViewContent] objectAtIndex:[indexPath section]] cells] objectAtIndex:[indexPath row]];
 	
+	[[self tableView] selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+	[cellObject didSelect];
+	[[self tableView] beginUpdates];
+	[[self tableView] endUpdates];
+	
 	if ([self isFormEditingEnabled] && [cellObject isEnabled]) {
 		if ([self showsKeyboardToolbar]) {
 			[[cellObject textField] setInputAccessoryView:[self keyboardToolbar]];
@@ -479,6 +494,11 @@
 	NSIndexPath *indexPath = [[self selectableCellIndexPaths] objectAtIndex:[textView tag]];
 	ADCellObject *cellObject = [[[[self tableViewContent] objectAtIndex:[indexPath section]] cells] objectAtIndex:[indexPath row]];
 	
+	[[self tableView] selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+	[cellObject didSelect];
+	[[self tableView] beginUpdates];
+	[[self tableView] endUpdates];
+	
 	if ([self isFormEditingEnabled] && [cellObject isEnabled]) {
 		if ([self showsKeyboardToolbar]) {
 			[[cellObject textView] setInputAccessoryView:[self keyboardToolbar]];
@@ -505,6 +525,7 @@
 	
 	[[self tableView] beginUpdates];
 	[[self tableView] endUpdates];
+	
 	[[cellObject textView] becomeFirstResponder];
 }
 

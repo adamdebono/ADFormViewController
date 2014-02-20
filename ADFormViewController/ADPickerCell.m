@@ -10,5 +10,13 @@
 
 @implementation ADPickerCell
 
+- (id)init {
+	if (self = [super init]) {
+		[self setClipsToBounds:YES];
+	}
+	
+	return self;
+}
+
 
 @end

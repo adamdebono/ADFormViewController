@@ -417,7 +417,7 @@
 		CGSize size = [[self textView] sizeThatFits:CGSizeMake([[self textView] frame].size.width, FLT_MAX)];
 		return MAX(size.height + 1, 44);
 	} else if ([self type] == ADFormCellTypePicker) {
-		return [[self cell] isSelected] ? 201 : 44;
+		return [[self cell] isSelected] ? 230 : 44;
 	}
 	
 	return UITableViewAutomaticDimension;

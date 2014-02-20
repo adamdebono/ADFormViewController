@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name				=	'ADFormViewController'
-  s.version				=	'1.0.0'
+  s.version				=	'1.0.1'
   s.license				=	'MIT'
   s.summary				=	'Create easy table view forms for iOS'
   s.homepage			=	'https://github.com/adamdebono/ADFormViewController'

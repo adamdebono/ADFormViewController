@@ -491,6 +491,9 @@
 }
 
 - (void)textViewDidBeginEditing:(UITextView *)textView {
+	NSIndexPath *indexPath = [[self selectableCellIndexPaths] objectAtIndex:[textView tag]];
+	[[self tableView] scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+	
 	[[self toolbarPrevButton] setEnabled:[self hasPreviousCell]];
 	[[self toolbarNextButton] setEnabled:[self hasNextCell]];
 }

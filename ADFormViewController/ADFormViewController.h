@@ -9,6 +9,7 @@
 #import "ADFormViewConstants.h"
 #import "ADCellObject.h"
 
+typedef BOOL(^ADValidateAction)(NSDictionary *values, NSString **error);
 typedef void(^ADDoneAction)(NSDictionary *values);
 
 @interface ADFormViewController : UITableViewController
@@ -16,7 +17,8 @@ typedef void(^ADDoneAction)(NSDictionary *values);
 @property (nonatomic) UIReturnKeyType returnKeyType;
 @property (nonatomic) BOOL showsKeyboardToolbar;
 @property (nonatomic) Class toolbarClass;
-@property (nonatomic, copy) ADDoneAction doneAction;
+@property (nonatomic, strong) ADValidateAction validateAction;
+@property (nonatomic, strong) ADDoneAction doneAction;
 
 @property (nonatomic, getter = isFormEditingEnabled) BOOL formEditingEnabled;
 

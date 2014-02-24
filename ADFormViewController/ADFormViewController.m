@@ -154,7 +154,17 @@
 }
 
 - (BOOL)validateFields {
-	return YES;
+	if (self.validateAction) {
+		NSString *error = nil;
+		if (self.validateAction([self allValues], &error)) {
+			return YES;
+		} else {
+			[[[UIAlertView alloc] initWithTitle:@"Error" message:error delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+			return NO;
+		}
+	} else {
+		return YES;
+	}
 }
 
 #pragma mark - Sections

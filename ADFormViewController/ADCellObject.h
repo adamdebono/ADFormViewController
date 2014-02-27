@@ -43,6 +43,9 @@
 - (BOOL)hasDatePicker;
 - (UIDatePicker *)datePicker;
 
+- (BOOL)hasToggle;
+- (UISwitch *)toggle;
+
 - (CGFloat)cellHeight;
 
 @property (nonatomic) UIColor *backgroundColor;

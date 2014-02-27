@@ -386,6 +386,8 @@
 			case ADFormCellTypeTextArea:
 				[[cellObject textView] becomeFirstResponder];
 				break;
+			case ADFormCellTypeToggle:
+				break;
 		}
 	}
 	

@@ -12,6 +12,7 @@
 #import "ADDateCell.h"
 #import "ADOptionCell.h"
 #import "ADPickerCell.h"
+#import "ADToggleCell.h"
 #import "ADTextFieldCell.h"
 #import "ADTextAreaCell.h"
 
@@ -72,6 +73,10 @@
 				[[self picker] setDataSource:self];
 				[[self picker] setDelegate:self];
 				NSAssert([self options], @"Must provide options");
+				[self setValue:_value];
+				break;
+			case ADFormCellTypeToggle:
+				_cell = [[ADToggleCell alloc] init];
 				[self setValue:_value];
 				break;
 			case ADFormCellTypeText:
@@ -189,6 +194,12 @@
 					} else {
 						[[_cell detailLabel] setText:@"select"];
 					}
+				}
+				break;
+			case ADFormCellTypeToggle:
+				if (_cell) {
+					[[(ADToggleCell *)_cell toggle] setOn:[[self value] boolValue]];
+					[[self toggle] addTarget:self action:@selector(toggleWasToggled:) forControlEvents:UIControlEventValueChanged];
 				}
 				break;
 			case ADFormCellTypePicker:
@@ -344,6 +355,30 @@
 	}
 }
 
+#pragma mark - Toggle
+
+- (BOOL)hasToggle {
+	switch ([self type]) {
+		case ADFormCellTypeToggle:
+			return YES;
+			break;
+		default:
+			return NO;
+			break;
+	}
+}
+
+- (UISwitch *)toggle {
+	switch ([self type]) {
+		case ADFormCellTypeToggle:
+			return [(ADToggleCell *)[self cell] toggle];
+			break;
+		default:
+			return NO;
+			break;
+	}
+}
+
 #pragma mark Picker View Data Source
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
@@ -377,6 +412,12 @@
 	}
 	
 	[self setValue:values];
+}
+
+#pragma mark - Toggle
+
+- (void)toggleWasToggled:(UISwitch *)sender {
+	[self setValue:@([sender isOn])];
 }
 
 #pragma mark -

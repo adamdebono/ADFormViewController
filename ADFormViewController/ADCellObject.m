@@ -423,4 +423,20 @@
 	return UITableViewAutomaticDimension;
 }
 
+#pragma mark - Styling
+
+- (void)setBackgroundColor:(UIColor *)backgroundColor {
+	_backgroundColor = backgroundColor;
+	
+	[[self cell] setBackgroundColor:backgroundColor];
+}
+
+- (void)setTextColor:(UIColor *)textColor {
+	_textColor = textColor;
+	
+	[[[self cell] label] setTextColor:textColor];
+	[[[self cell] detailLabel] setTextColor:textColor];
+	[[self textField] setTextColor:textColor];
+}
+
 @end

@@ -13,4 +13,8 @@
 
 @property (nonatomic) ADCellObject *cellObject;
 
+@property (nonatomic) UIColor *backgroundColor;
+@property (nonatomic) UIColor *elementColor;
+@property (nonatomic) UIColor *textColor;
+
 @end

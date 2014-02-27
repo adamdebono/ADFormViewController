@@ -32,4 +32,10 @@ typedef void(^ADDoneAction)(NSDictionary *values);
 - (id)valueForIdentifier:(NSString *)identifier;
 - (NSDictionary *)allValues;
 
+#pragma mark - Styling
+
+@property (nonatomic, copy) UIColor *backgroundColor;
+@property (nonatomic, copy) UIColor *elementColor;
+@property (nonatomic, copy) UIColor *textColor;
+
 @end

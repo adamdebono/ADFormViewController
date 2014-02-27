@@ -203,6 +203,12 @@
 	
 	ADSectionObject *sectionObject = [[self tableViewContent] objectAtIndex:section];
 	[[sectionObject cells] addObject:cellObject];
+	if ([self elementColor]) {
+		[cellObject setBackgroundColor:[self elementColor]];
+	}
+	if ([self textColor]) {
+		[cellObject setTextColor:[self textColor]];
+	}
 	
 	[self reload];
 }
@@ -356,12 +362,16 @@
 			case ADFormCellTypeDate:
 			case ADFormCellTypeText:
 				[[cellObject textField] becomeFirstResponder];
+				[tableView deselectRowAtIndexPath:indexPath animated:YES];
 				break;
 			case ADFormCellTypeSingleOption:
 				[[self findFirstResponder] resignFirstResponder];
 				
 				optionsViewController = [[ADFormOptionsViewController alloc] initWithStyle:UITableViewStylePlain];
 				[optionsViewController setCellObject:cellObject];
+				[optionsViewController setBackgroundColor:[self backgroundColor]];
+				[optionsViewController setElementColor:[self elementColor]];
+				[optionsViewController setTextColor:[self textColor]];
 				
 				NSAssert([self navigationController], @"Options cells can only be used in a navigation controller context");
 				[[self navigationController] pushViewController:optionsViewController animated:YES];
@@ -538,6 +548,34 @@
 	[[self tableView] endUpdates];
 	
 	[[cellObject textView] becomeFirstResponder];
+}
+
+#pragma mark - Styling
+
+- (void)setBackgroundColor:(UIColor *)backgroundColor {
+	_backgroundColor = backgroundColor;
+	
+	[[self tableView] setBackgroundColor:backgroundColor];
+}
+
+- (void)setElementColor:(UIColor *)elementColor {
+	_elementColor = elementColor;
+	
+	for (NSArray *section in [self tableViewContent]) {
+		for (ADCellObject *object in section) {
+			[object setBackgroundColor:elementColor];
+		}
+	}
+}
+
+- (void)setTextColor:(UIColor *)textColor {
+	_textColor = textColor;
+	
+	for (NSArray *section in [self tableViewContent]) {
+		for (ADCellObject *object in section) {
+			[object setTextColor:textColor];
+		}
+	}
 }
 
 @end

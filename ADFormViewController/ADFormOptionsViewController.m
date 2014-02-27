@@ -24,7 +24,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+	
 	NSAssert([self cellObject], @"Must provide a cell object");
 	
 	[[self navigationItem] setTitle:[[self cellObject] title]];
@@ -114,6 +114,13 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
 	if (!cell) {
 		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+		
+		if ([self elementColor]) {
+			[cell setBackgroundColor:[self elementColor]];
+		}
+		if ([self textColor]) {
+			[[cell textLabel] setTextColor:[self textColor]];
+		}
 	}
     
 	id value;
@@ -166,6 +173,14 @@
 	}
 	
 	[tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
+}
+
+#pragma mark - Styling
+
+- (void)setBackgroundColor:(UIColor *)backgroundColor {
+	_backgroundColor = backgroundColor;
+	
+	[[self tableView] setBackgroundColor:backgroundColor];
 }
 
 @end

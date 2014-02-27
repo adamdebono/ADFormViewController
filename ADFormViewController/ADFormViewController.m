@@ -563,8 +563,8 @@
 - (void)setElementColor:(UIColor *)elementColor {
 	_elementColor = elementColor;
 	
-	for (NSArray *section in [self tableViewContent]) {
-		for (ADCellObject *object in section) {
+	for (ADSectionObject *section in [self tableViewContent]) {
+		for (ADCellObject *object in [section cells]) {
 			[object setBackgroundColor:elementColor];
 		}
 	}
@@ -573,8 +573,8 @@
 - (void)setTextColor:(UIColor *)textColor {
 	_textColor = textColor;
 	
-	for (NSArray *section in [self tableViewContent]) {
-		for (ADCellObject *object in section) {
+	for (ADSectionObject *section in [self tableViewContent]) {
+		for (ADCellObject *object in [section cells]) {
 			[object setTextColor:textColor];
 		}
 	}

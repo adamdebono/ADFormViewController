@@ -17,7 +17,7 @@
 
 #import "UIImage+bundle.h"
 
-@interface ADFormViewController () <UITextFieldDelegate, UITextViewDelegate>
+@interface ADFormViewController () <ADFormOptionsViewControllerDelegate, UITextFieldDelegate, UITextViewDelegate>
 
 @property (nonatomic) NSMutableArray *tableViewContent;
 @property (nonatomic) NSMutableArray *selectableCellIndexPaths;
@@ -28,6 +28,8 @@
 
 @property (nonatomic) BOOL reloadOnAppear;
 @property (nonatomic) BOOL onScreen;
+
+@property (nonatomic) UIPopoverController *popover;
 
 @end
 
@@ -374,9 +376,18 @@
 				[optionsViewController setBackgroundColor:[self backgroundColor]];
 				[optionsViewController setElementColor:[self elementColor]];
 				[optionsViewController setTextColor:[self textColor]];
+				[optionsViewController setSeparatorColor:[self separatorColor]];
+				[optionsViewController setFormOptionsDelegate:self];
 				
-				NSAssert([self navigationController], @"Options cells can only be used in a navigation controller context");
-				[[self navigationController] pushViewController:optionsViewController animated:YES];
+				if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+					_popover = [[UIPopoverController alloc] initWithContentViewController:optionsViewController];
+					[self.popover setBackgroundColor:[self elementColor]];
+					[self.popover presentPopoverFromRect:[[cellObject cell] frame] inView:tableView permittedArrowDirections:UIPopoverArrowDirectionLeft animated:YES];
+					[tableView deselectRowAtIndexPath:indexPath animated:YES];
+				} else {
+					NSAssert([self navigationController], @"Options cells can only be used in a navigation controller context");
+					[[self navigationController] pushViewController:optionsViewController animated:YES];
+				}
 				break;
 			case ADFormCellTypePicker:
 				[[self findFirstResponder] resignFirstResponder];
@@ -396,6 +407,16 @@
 	//update row heights
 	[tableView beginUpdates];
 	[tableView endUpdates];
+}
+
+#pragma mark - Form Options Delegate
+
+- (void)optionsViewControllerDidFinish:(ADFormOptionsViewController *)optionsViewController {
+	if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+		[[self popover] dismissPopoverAnimated:YES];
+	} else {
+		[[self navigationController] popViewControllerAnimated:YES];
+	}
 }
 
 #pragma mark - Text Fields & Views
@@ -560,6 +581,12 @@
 	_backgroundColor = backgroundColor;
 	
 	[[self tableView] setBackgroundColor:backgroundColor];
+}
+
+- (void)setSeparatorColor:(UIColor *)separatorColor {
+	_separatorColor = separatorColor;
+	
+	[[self tableView] setSeparatorColor:separatorColor];
 }
 
 - (void)setElementColor:(UIColor *)elementColor {

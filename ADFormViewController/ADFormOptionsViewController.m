@@ -161,13 +161,14 @@
 		} else if ([[[self cellObject] options] isKindOfClass:[NSArray class]]) {
 			[[self cellObject] setValue:@([indexPath row])];
 		} else if ([[[self cellObject] options] isKindOfClass:[NSDictionary class]]) {
-			//[[self cellObject] setValue:[[[[self cellObject] options] allKeys] objectAtIndex:[indexPath row]]];
 			NSString *value = [[self tableViewValues] objectAtIndex:[indexPath row]];
 			NSArray *keys = [[[self cellObject] options] allKeysForObject:value];
 			[[self cellObject] setValue:[keys firstObject]];
 		}
 		
-		[[self navigationController] popViewControllerAnimated:YES];
+		if ([self formOptionsDelegate]) {
+			[[self formOptionsDelegate] optionsViewControllerDidFinish:self];
+		}
 	} else {
 		[tableView deselectRowAtIndexPath:indexPath animated:YES];
 	}
@@ -181,6 +182,12 @@
 	_backgroundColor = backgroundColor;
 	
 	[[self tableView] setBackgroundColor:backgroundColor];
+}
+
+- (void)setSeparatorColor:(UIColor *)separatorColor {
+	_separatorColor = separatorColor;
+	
+	[[self tableView] setSeparatorColor:separatorColor];
 }
 
 @end

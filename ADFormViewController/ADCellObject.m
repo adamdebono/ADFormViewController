@@ -478,6 +478,7 @@
 	[[[self cell] label] setTextColor:textColor];
 	[[[self cell] detailLabel] setTextColor:textColor];
 	[[self textField] setTextColor:textColor];
+	[[self textView] setTextColor:textColor];
 }
 
 @end

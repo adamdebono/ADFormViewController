@@ -311,6 +311,8 @@
 	}
 	
 	[[self tableView] reloadData];
+	[[self tableView] beginUpdates];
+	[[self tableView] endUpdates];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

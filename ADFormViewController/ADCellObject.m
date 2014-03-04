@@ -117,9 +117,23 @@
 	_enabled = enabled;
 	
 	if (enabled) {
-		[[self cell] setBackgroundColor:[UIColor whiteColor]];
+		[[self cell] setBackgroundColor:self.backgroundColor];
+		[[[self cell] label] setTextColor:self.textColor];
+		[[[self cell] detailLabel] setTextColor:self.textColor];
+		[[self textField] setTextColor:self.textColor];
+		
+		[[self toggle] setEnabled:YES];
+		[[self toggle] setOnTintColor:nil];
+		[[self toggle] setThumbTintColor:nil];
 	} else {
-		[[self cell] setBackgroundColor:[UIColor colorWithWhite:0.9 alpha:1]];
+		[[self cell] setBackgroundColor:self.disabledBackgroundColor];
+		[[[self cell] label] setTextColor:self.disabledTextColor];
+		[[[self cell] detailLabel] setTextColor:self.disabledTextColor];
+		[[self textField] setTextColor:self.disabledTextColor];
+		
+		[[self toggle] setEnabled:NO];
+		[[self toggle] setOnTintColor:self.disabledTextColor];
+		[[self toggle] setThumbTintColor:self.disabledTextColor];
 	}
 }
 
@@ -253,6 +267,14 @@
 				}
 				break;
 		}
+	}
+}
+
+- (void)setTitle:(NSString *)title {
+	_title = title;
+	
+	if (_cell) {
+		[[[self cell] label] setText:title];
 	}
 }
 

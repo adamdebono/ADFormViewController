@@ -211,6 +211,12 @@
 	if ([self textColor]) {
 		[cellObject setTextColor:[self textColor]];
 	}
+	if ([self disabledElementColor]) {
+		[cellObject setDisabledBackgroundColor:[self disabledElementColor]];
+	}
+	if ([self disabledTextColor]) {
+		[cellObject setDisabledTextColor:[self disabledTextColor]];
+	}
 	
 	[self reload];
 }
@@ -409,6 +415,11 @@
 	[tableView endUpdates];
 }
 
+- (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
+	ADCellObject *cellObject = [[[[self tableViewContent] objectAtIndex:[indexPath section]] cells] objectAtIndex:[indexPath row]];
+	return [cellObject isEnabled];
+}
+
 #pragma mark - Form Options Delegate
 
 - (void)optionsViewControllerDidFinish:(ADFormOptionsViewController *)optionsViewController {
@@ -605,6 +616,26 @@
 	for (ADSectionObject *section in [self tableViewContent]) {
 		for (ADCellObject *object in [section cells]) {
 			[object setTextColor:textColor];
+		}
+	}
+}
+
+- (void)setDisabledElementColor:(UIColor *)disabledElementColor {
+	_disabledElementColor = disabledElementColor;
+	
+	for (ADSectionObject *section in [self tableViewContent]) {
+		for (ADCellObject *object in [section cells]) {
+			[object setBackgroundColor:disabledElementColor];
+		}
+	}
+}
+
+- (void)setDisabledTextColor:(UIColor *)disabledTextColor {
+	_disabledTextColor = disabledTextColor;
+	
+	for (ADSectionObject *section in [self tableViewContent]) {
+		for (ADCellObject *object in [section cells]) {
+			[object setTextColor:disabledTextColor];
 		}
 	}
 }

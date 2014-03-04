@@ -37,7 +37,7 @@
 	// Generate modified
 	NSString *modifier = @"";
 	if (intScale != 1) {
-		modifier = [NSString stringWithFormat:@"@%dx", intScale];
+		modifier = [NSString stringWithFormat:@"@%lux", (unsigned long)intScale];
 	}
 	
 	// Generate resolution dependent name

@@ -39,4 +39,7 @@ typedef void(^ADDoneAction)(NSDictionary *values);
 @property (nonatomic, copy) UIColor *elementColor;
 @property (nonatomic, copy) UIColor *textColor;
 
+@property (nonatomic, copy) UIColor *disabledElementColor;
+@property (nonatomic, copy) UIColor *disabledTextColor;
+
 @end

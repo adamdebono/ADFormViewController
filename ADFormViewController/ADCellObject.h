@@ -49,6 +49,8 @@
 - (CGFloat)cellHeight;
 
 @property (nonatomic) UIColor *backgroundColor;
+@property (nonatomic) UIColor *disabledBackgroundColor;
 @property (nonatomic) UIColor *textColor;
+@property (nonatomic) UIColor *disabledTextColor;
 
 @end

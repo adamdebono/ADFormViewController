@@ -74,7 +74,7 @@
 				NSString *index = [[self cellObject] optionSectionIndexGetter](sectionTitle);
 				if (![[sectionIndexes lastObject] isEqualToString:index]) {
 					[sectionIndexes addObject:index];
-					[indexMapping setValue:[NSString stringWithFormat:@"%i", section] forKey:[NSString stringWithFormat:@"%i", i]];
+					[indexMapping setValue:[NSString stringWithFormat:@"%li", (long)section] forKey:[NSString stringWithFormat:@"%li", (long)i]];
 					
 					i++;
 				}
@@ -147,7 +147,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index {
-	return [[[self sectionIndexMapping] objectForKey:[NSString stringWithFormat:@"%i", index]] integerValue];
+	return [[[self sectionIndexMapping] objectForKey:[NSString stringWithFormat:@"%li", (long)index]] integerValue];
 }
 
 #pragma mark - Table View Delegate

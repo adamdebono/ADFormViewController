@@ -303,9 +303,6 @@
 				
 				[[cellObject textField] setDelegate:self];
 				[[self selectableCellIndexPaths] insertObject:[NSIndexPath indexPathForRow:row inSection:section] atIndex:0];
-			} else if ([cellObject type] == ADFormCellTypeDate) {
-				[[cellObject textField] setDelegate:self];
-				[[self selectableCellIndexPaths] insertObject:[NSIndexPath indexPathForRow:row inSection:section] atIndex:0];
 			} else if ([cellObject type] == ADFormCellTypeTextArea) {
 				[[cellObject textView] setDelegate:self];
 				[[self selectableCellIndexPaths] insertObject:[NSIndexPath indexPathForRow:row inSection:section] atIndex:0];
@@ -378,7 +375,6 @@
 			case ADFormCellTypeButton:
 				[tableView deselectRowAtIndexPath:indexPath animated:YES];
 				break;
-			case ADFormCellTypeDate:
 			case ADFormCellTypeText:
 				[[cellObject textField] becomeFirstResponder];
 				[tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -404,6 +400,7 @@
 					[[self navigationController] pushViewController:optionsViewController animated:YES];
 				}
 				break;
+			case ADFormCellTypeDatePicker:
 			case ADFormCellTypePicker:
 				[[self findFirstResponder] resignFirstResponder];
 				if ([[cellObject cell] frame].size.height != 44) {

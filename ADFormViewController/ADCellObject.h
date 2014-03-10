@@ -42,6 +42,8 @@
 
 - (BOOL)hasDatePicker;
 - (UIDatePicker *)datePicker;
+@property (nonatomic) UIDatePickerMode datePickerMode;
+@property (nonatomic, copy) NSDateFormatter *dateFormatter;
 
 - (BOOL)hasToggle;
 - (UISwitch *)toggle;

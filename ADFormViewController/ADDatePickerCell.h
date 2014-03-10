@@ -8,10 +8,8 @@
 
 #import "ADTextFieldCell.h"
 
-@interface ADDateCell : ADTableViewCell
+@interface ADDatePickerCell : ADTableViewCell
 
-@property (nonatomic, readonly) UIDatePicker *datePicker;
-
-- (void)setDate:(NSDate *)date;
+@property (nonatomic) IBOutlet UIDatePicker *datePicker;
 
 @end

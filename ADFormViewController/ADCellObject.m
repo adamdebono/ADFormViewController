@@ -9,7 +9,7 @@
 #import "ADCellObject.h"
 
 #import "ADButtonCell.h"
-#import "ADDateCell.h"
+#import "ADDatePickerCell.h"
 #import "ADOptionCell.h"
 #import "ADPickerCell.h"
 #import "ADToggleCell.h"
@@ -18,10 +18,14 @@
 
 @interface ADCellObject () <UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
 
+@property (nonatomic) BOOL userSetDateFormatter;
+
 @end
 
 @implementation ADCellObject
+
 @synthesize cell = _cell;
+@synthesize dateFormatter = _dateFormatter;
 
 + (ADCellObject *)cellWithType:(ADFormCellType)type {
 	return [[ADCellObject alloc] initWithType:type];
@@ -42,6 +46,9 @@
 		_cellPressedAction = NULL;
 		_enabled = YES;
 		
+		_userSetDateFormatter = NO;
+		_datePickerMode = UIDatePickerModeDate;
+		
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(formCellWasSelected:) name:ADFormCellDidSelect object:nil];
 	}
 	
@@ -55,13 +62,12 @@
 			case ADFormCellTypeDoneButton:
 				_cell = [[ADButtonCell alloc] init];
 				break;
-			case ADFormCellTypeDate:
-				_cell = [[ADDateCell alloc] init];
+			case ADFormCellTypeDatePicker:
+				_cell = [[ADDatePickerCell alloc] init];
 				if (![self value]) {
 					_value = [NSDate date];
 				}
-				NSAssert([[self value] isKindOfClass:[NSDate class]], @"Date cell must have a date value");
-				[(ADDateCell *)[self cell] setDate:[self value]];
+				[self setValue:_value];
 				break;
 			case ADFormCellTypeSingleOption:
 				_cell = [[ADOptionCell alloc] init];
@@ -183,11 +189,10 @@
 			case ADFormCellTypeButton:
 			case ADFormCellTypeDoneButton:
 				break;
-			case ADFormCellTypeDate:
+			case ADFormCellTypeDatePicker:
 				NSAssert([value isKindOfClass:[NSDate class]], @"Date cell must be given a date value");
-				if (_cell) {
-					[(ADDateCell *)[self cell] setDate:value];
-				}
+				[[self datePicker] setDate:value];
+				[[[self cell] detailLabel] setText:[[self dateFormatter] stringFromDate:value]];
 				break;
 			case ADFormCellTypeSingleOption:
 				if (_cell) {
@@ -283,7 +288,6 @@
 - (BOOL)hasTextField {
 	switch ([self type]) {
 		case ADFormCellTypeText:
-		case ADFormCellTypeDate:
 			return YES;
 			break;
 		default:
@@ -295,7 +299,6 @@
 - (UITextField *)textField {
 	switch ([self type]) {
 		case ADFormCellTypeText:
-		case ADFormCellTypeDate:
 		case ADFormCellTypePicker:
 			return [(ADTextFieldCell *)[self cell] textField];
 			break;
@@ -333,7 +336,7 @@
 
 - (BOOL)hasDatePicker {
 	switch ([self type]) {
-		case ADFormCellTypeDate:
+		case ADFormCellTypeDatePicker:
 			return YES;
 			break;
 		default:
@@ -344,13 +347,53 @@
 
 - (UIDatePicker *)datePicker {
 	switch ([self type]) {
-		case ADFormCellTypeDate:
-			return [(ADDateCell *)[self cell] datePicker];
+		case ADFormCellTypeDatePicker:
+			return [(ADDatePickerCell *)[self cell] datePicker];
 			break;
 		default:
 			return nil;
 			break;
 	}
+}
+
+- (void)setDatePickerMode:(UIDatePickerMode)datePickerMode {
+	_datePickerMode = datePickerMode;
+	
+	[[self datePicker] setDatePickerMode:datePickerMode];
+	if (!self.userSetDateFormatter) {
+		_dateFormatter = nil;
+	}
+	[self setValue:_value];
+}
+
+- (NSDateFormatter *)dateFormatter {
+	if (!_dateFormatter) {
+		_dateFormatter = [[NSDateFormatter alloc] init];
+		switch (self.datePickerMode) {
+			case UIDatePickerModeDate:
+				[_dateFormatter setDateStyle:NSDateFormatterShortStyle];
+				[_dateFormatter setTimeStyle:NSDateFormatterNoStyle];
+				break;
+			case UIDatePickerModeDateAndTime:
+				[_dateFormatter setDateStyle:NSDateFormatterShortStyle];
+				[_dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+			case UIDatePickerModeTime:
+				[_dateFormatter setDateStyle:NSDateFormatterNoStyle];
+				[_dateFormatter setTimeStyle:NSDateFormatterNoStyle];
+				break;
+			case UIDatePickerModeCountDownTimer:
+				[_dateFormatter setDateFormat:@"H 'Hrs' m 'Mins'"];
+				break;
+		}
+	}
+	
+	return _dateFormatter;
+}
+
+- (void)setDateFormatter:(NSDateFormatter *)dateFormatter {
+	_dateFormatter = dateFormatter;
+	
+	_userSetDateFormatter = YES;
 }
 
 #pragma mark - Picker View
@@ -446,6 +489,7 @@
 
 - (void)didSelect {
 	switch ([self type]) {
+		case ADFormCellTypeDatePicker:
 		case ADFormCellTypePicker:
 			[[self textField] setTextColor:[UIColor redColor]];
 			break;
@@ -464,6 +508,7 @@
 
 - (void)didDeselect {
 	switch ([self type]) {
+		case ADFormCellTypeDatePicker:
 		case ADFormCellTypePicker:
 			[[self textField] setTextColor:[UIColor blackColor]];
 			break;
@@ -479,7 +524,7 @@
 		//		[[self textView] setText:[self value]];
 		CGSize size = [[self textView] sizeThatFits:CGSizeMake([[self textView] frame].size.width, FLT_MAX)];
 		return MAX(size.height + 1, 44);
-	} else if ([self type] == ADFormCellTypePicker) {
+	} else if ([self type] == ADFormCellTypePicker || [self type] == ADFormCellTypeDatePicker) {
 		return [[self cell] isSelected] ? 230 : 44;
 	}
 	

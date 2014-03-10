@@ -16,7 +16,7 @@
 #import "ADTextFieldCell.h"
 #import "ADTextAreaCell.h"
 
-@interface ADCellObject () <UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
+@interface ADCellObject () <UITextFieldDelegate>
 
 @property (nonatomic) BOOL userSetDateFormatter;
 
@@ -76,9 +76,8 @@
 				break;
 			case ADFormCellTypePicker:
 				_cell = [[ADPickerCell alloc] init];
-				[[self picker] setDataSource:self];
-				[[self picker] setDelegate:self];
 				NSAssert([self options], @"Must provide options");
+				[_cell setCellObject:self];
 				[self setValue:_value];
 				break;
 			case ADFormCellTypeToggle:
@@ -163,6 +162,7 @@
 				NSArray *newOptions = [NSArray arrayWithObject:_options];
 				_options = newOptions;
 			}
+			[[self picker] reloadAllComponents];
 			break;
 		default:
 			break;
@@ -442,41 +442,6 @@
 			return NO;
 			break;
 	}
-}
-
-#pragma mark Picker View Data Source
-
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
-	return [[self options] count];
-}
-
-- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-	id rows = [[self options] objectAtIndex:component];
-	return [rows count];
-}
-
-#pragma mark Picker View Delegate
-
-- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-	id rows = [[self options] objectAtIndex:component];
-	id val = nil;
-	if ([rows isKindOfClass:[NSArray class]]) {
-		val = [rows objectAtIndex:row];
-	} else if ([rows isKindOfClass:[NSDictionary class]]) {
-		val = [[rows allValues] objectAtIndex:row];
-	}
-	
-	return [NSString stringWithFormat:@"%@", val];
-}
-
-- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-	NSMutableArray *values = [_value mutableCopy];
-	id rows = [[self options] objectAtIndex:component];
-	if ([rows isKindOfClass:[NSArray class]]) {
-		[values replaceObjectAtIndex:component withObject:@(row)];
-	}
-	
-	[self setValue:values];
 }
 
 #pragma mark - Toggle

@@ -68,6 +68,15 @@
 	_doneAction = NULL;
 	
 	_formEditingEnabled = YES;
+	
+	//Colors
+	_backgroundColor = nil;
+	_separatorColor = nil;
+	_elementColor = [UIColor whiteColor];
+	_textColor = [UIColor blackColor];
+	
+	_disabledElementColor = [UIColor lightGrayColor];
+	_disabledTextColor = [UIColor darkGrayColor];
 }
 
 - (void)setToolbarClass:(Class)toolbarClass {

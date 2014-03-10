@@ -64,9 +64,6 @@
 				break;
 			case ADFormCellTypeDatePicker:
 				_cell = [[ADDatePickerCell alloc] init];
-				if (![self value]) {
-					_value = [NSDate date];
-				}
 				[self setValue:_value];
 				break;
 			case ADFormCellTypeSingleOption:
@@ -190,8 +187,21 @@
 			case ADFormCellTypeDoneButton:
 				break;
 			case ADFormCellTypeDatePicker:
-				NSAssert([value isKindOfClass:[NSDate class]], @"Date cell must be given a date value");
-				[[self datePicker] setDate:value];
+				if (self.datePickerMode == UIDatePickerModeCountDownTimer) {
+					if (!_value) {
+						[[self datePicker] setCountDownDuration:0];
+						_value = [[self datePicker] date];
+					} else if ([_value isKindOfClass:[NSNumber class]]) {
+						[[self datePicker] setCountDownDuration:[_value doubleValue]];
+						_value = [[self datePicker] date];
+					}
+				}
+				if (!_value) {
+					_value = [NSDate date];
+				}
+				NSAssert([_value isKindOfClass:[NSDate class]], @"Date cell must be given a date value");
+				[[self datePicker] setDate:_value];
+				
 				[[[self cell] detailLabel] setText:[[self dateFormatter] stringFromDate:value]];
 				break;
 			case ADFormCellTypeSingleOption:

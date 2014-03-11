@@ -20,6 +20,8 @@
 	if (self = [super init]) {
 		[self setClipsToBounds:YES];
 		
+		[[self picker] setUserInteractionEnabled:NO];
+		
 		[[self picker] setDataSource:self];
 		[[self picker] setDelegate:self];
 		[[self picker] reloadAllComponents];

@@ -42,6 +42,7 @@
 		6622AEAE18CD89760038B1E1 /* ADDatePickerCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ADDatePickerCell.xib; sourceTree = "<group>"; };
 		6622AEAF18CD898F0038B1E1 /* ADDatePickerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADDatePickerCell.h; sourceTree = "<group>"; };
 		6622AEB018CD898F0038B1E1 /* ADDatePickerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADDatePickerCell.m; sourceTree = "<group>"; };
+		662DB6A818CEAC8900BD85EE /* ADPickerCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ADPickerCell.xib; sourceTree = "<group>"; };
 		664076D518B564870063CF45 /* arrow-backward.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow-backward.png"; sourceTree = "<group>"; };
 		664076D618B564870063CF45 /* arrow-backward@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow-backward@2x.png"; sourceTree = "<group>"; };
 		664076D918B5648E0063CF45 /* arrow-forward.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow-forward.png"; sourceTree = "<group>"; };
@@ -54,7 +55,6 @@
 		66F2C16F18B5860100C90545 /* ADTextAreaCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADTextAreaCell.h; sourceTree = "<group>"; };
 		66F2C17018B5860100C90545 /* ADTextAreaCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADTextAreaCell.m; sourceTree = "<group>"; };
 		66F2C17218B5860700C90545 /* ADTextAreaCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ADTextAreaCell.xib; sourceTree = "<group>"; };
-		66F2C17D18B5B39900C90545 /* ADPickerCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ADPickerCell.xib; sourceTree = "<group>"; };
 		66F2C17E18B5B3A100C90545 /* ADPickerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADPickerCell.h; sourceTree = "<group>"; };
 		66F2C17F18B5B3A100C90545 /* ADPickerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADPickerCell.m; sourceTree = "<group>"; };
 		8456993317FFB3FB003C08B6 /* UIImage+bundle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+bundle.h"; sourceTree = "<group>"; };
@@ -112,7 +112,7 @@
 			children = (
 				A25065CB175387680095B09D /* ADButtonCell.xib */,
 				6622AEAE18CD89760038B1E1 /* ADDatePickerCell.xib */,
-				66F2C17D18B5B39900C90545 /* ADPickerCell.xib */,
+				662DB6A818CEAC8900BD85EE /* ADPickerCell.xib */,
 				66F2C17218B5860700C90545 /* ADTextAreaCell.xib */,
 				A250659617535E950095B09D /* ADTextFieldCell.xib */,
 				66CE294D18BFF4C700D15BF7 /* ADToggleCell.xib */,

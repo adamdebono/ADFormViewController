@@ -202,7 +202,7 @@
 				NSAssert([_value isKindOfClass:[NSDate class]], @"Date cell must be given a date value");
 				[[self datePicker] setDate:_value];
 				
-				[[[self cell] detailLabel] setText:[[self dateFormatter] stringFromDate:value]];
+				[[[self cell] detailLabel] setText:[[self dateFormatter] stringFromDate:_value]];
 				break;
 			case ADFormCellTypeSingleOption:
 				if (_cell) {
@@ -262,7 +262,7 @@
 							[str appendFormat:@" %@", [[self optionSectionTitles] objectAtIndex:i]];
 						}
 					}
-					[[self textField] setText:str];
+					[[[self cell] detailLabel] setText:str];
 				}
 				break;
 			case ADFormCellTypeText:
@@ -309,7 +309,6 @@
 - (UITextField *)textField {
 	switch ([self type]) {
 		case ADFormCellTypeText:
-		case ADFormCellTypePicker:
 			return [(ADTextFieldCell *)[self cell] textField];
 			break;
 		default:
@@ -465,8 +464,12 @@
 - (void)didSelect {
 	switch ([self type]) {
 		case ADFormCellTypeDatePicker:
+			[[[self cell] detailLabel] setTextColor:[UIColor redColor]];
+			[[self datePicker] setUserInteractionEnabled:YES];
+			break;
 		case ADFormCellTypePicker:
-			[[self textField] setTextColor:[UIColor redColor]];
+			[[[self cell] detailLabel] setTextColor:[UIColor redColor]];
+			[[self picker] setUserInteractionEnabled:YES];
 			break;
 		default:
 			break;
@@ -484,8 +487,12 @@
 - (void)didDeselect {
 	switch ([self type]) {
 		case ADFormCellTypeDatePicker:
+			[[[self cell] detailLabel] setTextColor:[self textColor]];
+			[[self datePicker] setUserInteractionEnabled:NO];
+			break;
 		case ADFormCellTypePicker:
-			[[self textField] setTextColor:[UIColor blackColor]];
+			[[[self cell] detailLabel] setTextColor:[self textColor]];
+			[[self picker] setUserInteractionEnabled:NO];
 			break;
 		default:
 			break;

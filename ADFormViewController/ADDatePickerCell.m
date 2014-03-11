@@ -20,6 +20,7 @@
 	if (self = [super init]) {
 		[self setClipsToBounds:YES];
 		
+		[[self datePicker] setUserInteractionEnabled:NO];
 		[[self datePicker] addTarget:self action:@selector(datePickerValueChanged:) forControlEvents:UIControlEventValueChanged];
 	}
 	

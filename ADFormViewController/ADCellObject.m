@@ -233,7 +233,7 @@
 							if ([value count]) {
 								if ([[self options] isKindOfClass:[NSArray class]]) {
 									NSMutableArray *newValue = [NSMutableArray array];
-									for (id obj in newValue) {
+									for (id obj in value) {
 										if ([obj isKindOfClass:[NSNumber class]]) {
 											[newValue addObject:[NSString stringWithFormat:@"%@", [[self options] objectAtIndex:[obj integerValue]]]];
 										} else {

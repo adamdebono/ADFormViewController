@@ -15,6 +15,7 @@
 @end
 
 @implementation ADTableViewCell
+@synthesize reuseIdentifier = _reuseIdentifier;
 
 - (id)init {
 	NSString *path = [[NSBundle mainBundle] pathForResource:@"ADFormViewControllerResources" ofType:@"bundle"];

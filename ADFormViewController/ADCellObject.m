@@ -67,6 +67,7 @@
 				[self setValue:_value];
 				break;
 			case ADFormCellTypeSingleOption:
+			case ADFormCellTypeMultipleOption:
 				_cell = [[ADOptionCell alloc] init];
 				NSAssert([self options], @"Must provide options");
 				[self setValue:_value];
@@ -219,6 +220,40 @@
 							[[_cell detailLabel] setText:[NSString stringWithFormat:@"%@", [[self options] objectForKey:value]]];
 						} else {
 							NSAssert(false, @"Option must be either array or dictionary");
+						}
+					} else {
+						[[_cell detailLabel] setText:@"select"];
+					}
+				}
+				break;
+			case ADFormCellTypeMultipleOption:
+				if (_cell) {
+					if (value) {
+						if ([value isKindOfClass:[NSArray class]]) {
+							if ([value count]) {
+								if ([[self options] isKindOfClass:[NSArray class]]) {
+									NSMutableArray *newValue = [NSMutableArray array];
+									for (id obj in newValue) {
+										if ([obj isKindOfClass:[NSNumber class]]) {
+											[newValue addObject:[NSString stringWithFormat:@"%@", [[self options] objectAtIndex:[obj integerValue]]]];
+										} else {
+											[newValue addObject:obj];
+										}
+									}
+									_value = newValue;
+									
+									[[_cell detailLabel] setText:[newValue componentsJoinedByString:@" "]];
+								} else if ([[self options] isKindOfClass:[NSDictionary class]]) {
+									NSArray *theValues = [[self options] objectsForKeys:value notFoundMarker:[NSNull null]];
+									[[_cell detailLabel] setText:[theValues componentsJoinedByString:@" "]];
+								} else {
+									NSAssert(false, @"Options must be either array or dictionary");
+								}
+							} else {
+								[[_cell detailLabel] setText:@"select"];
+							}
+						} else {
+							NSAssert(false, @"There must be an array of values");
 						}
 					} else {
 						[[_cell detailLabel] setText:@"select"];

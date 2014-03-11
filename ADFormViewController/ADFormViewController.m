@@ -70,7 +70,7 @@
 	_formEditingEnabled = YES;
 	
 	//Colors
-	_backgroundColor = nil;
+	_backgroundColor = [UIColor whiteColor];
 	_separatorColor = nil;
 	_elementColor = [UIColor whiteColor];
 	_textColor = [UIColor blackColor];
@@ -380,6 +380,7 @@
 				[tableView deselectRowAtIndexPath:indexPath animated:YES];
 				break;
 			case ADFormCellTypeSingleOption:
+			case ADFormCellTypeMultipleOption:
 				[[self findFirstResponder] resignFirstResponder];
 				
 				optionsViewController = [[ADFormOptionsViewController alloc] initWithStyle:UITableViewStylePlain];

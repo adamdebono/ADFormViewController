@@ -14,6 +14,7 @@ typedef NS_ENUM(NSInteger, ADFormCellType) {
 	ADFormCellTypeDatePicker,
 	ADFormCellTypeDoneButton,
 	ADFormCellTypeSingleOption,
+	ADFormCellTypeMultipleOption,
 	ADFormCellTypePicker,
 	ADFormCellTypeText,
 	ADFormCellTypeTextArea,

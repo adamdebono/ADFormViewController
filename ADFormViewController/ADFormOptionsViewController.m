@@ -89,11 +89,22 @@
 }
 
 - (BOOL)isValueSelected:(NSString *)value {
-	if ([[[self cellObject] options] isKindOfClass:[NSDictionary class]]) {
-		return [[[[self cellObject] options] objectForKey:[[self cellObject] value]] isEqualToString:value];
-	} else {
-		return [[[self cellObject] value] isEqualToString:value];
+	if ([[self cellObject] type] == ADFormCellTypeSingleOption) {
+		if ([[[self cellObject] options] isKindOfClass:[NSDictionary class]]) {
+			return [[[[self cellObject] options] objectForKey:[[self cellObject] value]] isEqualToString:value];
+		} else {
+			return [[[self cellObject] value] isEqualToString:value];
+		}
+	} else if ([[self cellObject] type] == ADFormCellTypeMultipleOption) {
+		if ([[[self cellObject] options] isKindOfClass:[NSDictionary class]]) {
+			NSString *key = [[[[self cellObject] options] allKeysForObject:value] firstObject];
+			return [[[self cellObject] value] containsObject:key];
+		} else {
+			return [[[self cellObject] value] containsObject:value];
+		}
 	}
+	
+	return NO;
 }
 
 #pragma mark - Table View Data Source
@@ -153,27 +164,40 @@
 #pragma mark - Table View Delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	if ([[self cellObject] type] == ADFormCellTypeSingleOption) {
+	if ([[self cellObject] type] == ADFormCellTypeSingleOption || [[self cellObject] type] == ADFormCellTypeMultipleOption) {
 		if ([self sections]) {
 			NSString *value = [[[self sections] objectAtIndex:[indexPath section]] objectAtIndex:[indexPath row]];
 			NSArray *keys = [[[self cellObject] options] allKeysForObject:value];
-			[[self cellObject] setValue:[keys firstObject]];
+			[self useValue:[keys firstObject]];
 		} else if ([[[self cellObject] options] isKindOfClass:[NSArray class]]) {
-			[[self cellObject] setValue:@([indexPath row])];
+			[self useValue:@([indexPath row])];
 		} else if ([[[self cellObject] options] isKindOfClass:[NSDictionary class]]) {
 			NSString *value = [[self tableViewValues] objectAtIndex:[indexPath row]];
 			NSArray *keys = [[[self cellObject] options] allKeysForObject:value];
-			[[self cellObject] setValue:[keys firstObject]];
-		}
-		
-		if ([self formOptionsDelegate]) {
-			[[self formOptionsDelegate] optionsViewControllerDidFinish:self];
+			[self useValue:[keys firstObject]];
 		}
 	} else {
 		[tableView deselectRowAtIndexPath:indexPath animated:YES];
 	}
 	
-	[tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
+	[tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
+}
+
+- (void)useValue:(id)value {
+	if ([[self cellObject] type] == ADFormCellTypeSingleOption) {
+		[[self cellObject] setValue:value];
+	} else if ([[self cellObject] type] == ADFormCellTypeMultipleOption) {
+		NSMutableArray *newValue = [[[self cellObject] value] mutableCopy];
+		if (!newValue) {
+			newValue = [NSMutableArray array];
+		}
+		if ([newValue containsObject:value]) {
+			[newValue removeObject:value];
+		} else {
+			[newValue addObject:value];
+		}
+		[[self cellObject] setValue:newValue];
+	}
 }
 
 #pragma mark - Styling

@@ -18,7 +18,8 @@ typedef NS_ENUM(NSInteger, ADFormCellType) {
 	ADFormCellTypePicker,
 	ADFormCellTypeText,
 	ADFormCellTypeTextArea,
-	ADFormCellTypeToggle
+	ADFormCellTypeToggle,
+	ADFormCellTypeCustom
 };
 
 static NSString *const ADFormCellDidSelect = @"ADFormCellDidSelect";

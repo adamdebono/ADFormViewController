@@ -49,15 +49,15 @@
 		_userSetDateFormatter = NO;
 		_datePickerMode = UIDatePickerModeDate;
 		
+		_cellHeight = UITableViewAutomaticDimension;
+		
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(formCellWasSelected:) name:ADFormCellDidSelect object:nil];
 	}
 	
 	return self;
 }
 
-- (void)dealloc {
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
-}
+
 
 - (ADTableViewCell *)cell {
 	if (!_cell) {
@@ -102,6 +102,8 @@
 				}
 				[[self textView] setText:[NSString stringWithFormat:@"%@", [self value]]];
 				break;
+			case ADFormCellTypeCustom:
+				break;
 		}
 		
 		if ([_cell label]) {
@@ -114,6 +116,10 @@
 	return _cell;
 }
 
+- (void)setCustomCell:(UITableViewCell *)cell {
+	_cell = (ADTableViewCell *)cell;
+}
+
 - (NSString *)description {
 	return [[super description] stringByAppendingFormat:@" id: %@, value: %@", [self identifier], [self value]];
 }
@@ -122,6 +128,10 @@
 
 - (void)setEnabled:(BOOL)enabled {
 	_enabled = enabled;
+	
+	if ([self type] == ADFormCellTypeCustom) {
+		return;
+	}
 	
 	if (enabled) {
 		[[self cell] setBackgroundColor:self.backgroundColor];
@@ -201,13 +211,13 @@
 						_value = [[self datePicker] date];
 					}
 				}
-				if (!_value) {
-					_value = [NSDate date];
+				if (value) {
+					NSAssert([_value isKindOfClass:[NSDate class]], @"Date cell must be given a date value");
+					[[self datePicker] setDate:_value];
+					[[[self cell] detailLabel] setText:[[self dateFormatter] stringFromDate:_value]];
+				} else {
+					[[[self cell] detailLabel] setText:@"select"];
 				}
-				NSAssert([_value isKindOfClass:[NSDate class]], @"Date cell must be given a date value");
-				[[self datePicker] setDate:_value];
-				
-				[[[self cell] detailLabel] setText:[[self dateFormatter] stringFromDate:_value]];
 				break;
 			case ADFormCellTypeSingleOption:
 				if (_cell) {
@@ -319,6 +329,8 @@
 				if (_cell) {
 					[[self textView] setText:[NSString stringWithFormat:@"%@", [self value]]];
 				}
+				break;
+			case ADFormCellTypeCustom:
 				break;
 		}
 	}
@@ -541,15 +553,16 @@
 #pragma mark - Cell Size
 
 - (CGFloat)cellHeight {
-	if ([self type] == ADFormCellTypeTextArea) {
-		//		[[self textView] setText:[self value]];
-		CGSize size = [[self textView] sizeThatFits:CGSizeMake([[self textView] frame].size.width, FLT_MAX)];
-		return MAX(size.height + 1, 44);
-	} else if ([self type] == ADFormCellTypePicker || [self type] == ADFormCellTypeDatePicker) {
-		return [[self cell] isSelected] ? 230 : 44;
+	if (_cellHeight == UITableViewAutomaticDimension) {
+		if ([self type] == ADFormCellTypeTextArea) {
+			CGSize size = [[self textView] sizeThatFits:CGSizeMake([[self textView] frame].size.width, FLT_MAX)];
+			return MAX(size.height + 1, 44);
+		} else if ([self type] == ADFormCellTypePicker || [self type] == ADFormCellTypeDatePicker) {
+			return [[self cell] isSelected] ? 230 : 44;
+		}
 	}
 	
-	return UITableViewAutomaticDimension;
+	return _cellHeight;
 }
 
 #pragma mark - Styling
@@ -563,10 +576,16 @@
 - (void)setTextColor:(UIColor *)textColor {
 	_textColor = textColor;
 	
-	[[[self cell] label] setTextColor:textColor];
-	[[[self cell] detailLabel] setTextColor:textColor];
-	[[self textField] setTextColor:textColor];
-	[[self textView] setTextColor:textColor];
+	switch ([self type]) {
+		case ADFormCellTypeCustom:
+			break;
+		default:
+			[[[self cell] label] setTextColor:textColor];
+			[[[self cell] detailLabel] setTextColor:textColor];
+			[[self textField] setTextColor:textColor];
+			[[self textView] setTextColor:textColor];
+			break;
+	}
 }
 
 @end

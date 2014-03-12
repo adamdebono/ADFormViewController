@@ -30,6 +30,7 @@
 @property (nonatomic, copy) NSString *(^optionSectionIndexGetter)(NSString *sectionTitle);
 
 @property (nonatomic, readonly) ADTableViewCell *cell;
+- (void)setCustomCell:(UITableViewCell *)cell;
 
 - (void)didSelect;
 - (void)didDeselect;
@@ -48,7 +49,7 @@
 - (BOOL)hasToggle;
 - (UISwitch *)toggle;
 
-- (CGFloat)cellHeight;
+@property (nonatomic) CGFloat cellHeight;
 
 @property (nonatomic) UIColor *backgroundColor;
 @property (nonatomic) UIColor *disabledBackgroundColor;

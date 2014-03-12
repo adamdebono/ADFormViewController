@@ -414,6 +414,8 @@
 				break;
 			case ADFormCellTypeToggle:
 				break;
+			case ADFormCellTypeCustom:
+				break;
 		}
 	}
 	

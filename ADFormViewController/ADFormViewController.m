@@ -373,6 +373,7 @@
 			case ADFormCellTypeDoneButton:
 				[self performDoneAction];
 			case ADFormCellTypeButton:
+			case ADFormCellTypeStandard:
 				[tableView deselectRowAtIndexPath:indexPath animated:YES];
 				break;
 			case ADFormCellTypeText:
@@ -404,7 +405,7 @@
 			case ADFormCellTypeDatePicker:
 			case ADFormCellTypePicker:
 				[[self findFirstResponder] resignFirstResponder];
-				if ([[cellObject cell] frame].size.height != 44) {
+				if ([[cellObject cell] frame].size.height != 44 || ![self isFormEditingEnabled]) {
 					[tableView deselectRowAtIndexPath:indexPath animated:YES];
 					[cellObject didDeselect];
 				}

@@ -50,6 +50,7 @@
 - (UISwitch *)toggle;
 
 @property (nonatomic) CGFloat cellHeight;
+@property (nonatomic) UITableViewCellStyle standardCellStyle;
 
 @property (nonatomic) UIColor *backgroundColor;
 @property (nonatomic) UIColor *disabledBackgroundColor;

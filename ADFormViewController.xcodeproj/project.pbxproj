@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6622AEB118CD898F0038B1E1 /* ADDatePickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6622AEB018CD898F0038B1E1 /* ADDatePickerCell.m */; };
+		669C197318CFE4AB000B3DFA /* ADStandardCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 669C197218CFE4AB000B3DFA /* ADStandardCell.m */; };
 		66CE295018BFF4DD00D15BF7 /* ADToggleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 66CE294F18BFF4DD00D15BF7 /* ADToggleCell.m */; };
 		66F2C17118B5860100C90545 /* ADTextAreaCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 66F2C17018B5860100C90545 /* ADTextAreaCell.m */; };
 		66F2C18018B5B3A100C90545 /* ADPickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 66F2C17F18B5B3A100C90545 /* ADPickerCell.m */; };
@@ -47,6 +48,8 @@
 		664076D618B564870063CF45 /* arrow-backward@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow-backward@2x.png"; sourceTree = "<group>"; };
 		664076D918B5648E0063CF45 /* arrow-forward.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow-forward.png"; sourceTree = "<group>"; };
 		664076DA18B5648E0063CF45 /* arrow-forward@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow-forward@2x.png"; sourceTree = "<group>"; };
+		669C197118CFE4AB000B3DFA /* ADStandardCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADStandardCell.h; sourceTree = "<group>"; };
+		669C197218CFE4AB000B3DFA /* ADStandardCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADStandardCell.m; sourceTree = "<group>"; };
 		66CE294D18BFF4C700D15BF7 /* ADToggleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ADToggleCell.xib; sourceTree = "<group>"; };
 		66CE294E18BFF4DD00D15BF7 /* ADToggleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADToggleCell.h; sourceTree = "<group>"; };
 		66CE294F18BFF4DD00D15BF7 /* ADToggleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADToggleCell.m; sourceTree = "<group>"; };
@@ -191,12 +194,14 @@
 			children = (
 				A25065C81753873C0095B09D /* ADButtonCell.h */,
 				A25065C91753873C0095B09D /* ADButtonCell.m */,
-				8456993B17FFC4A6003C08B6 /* ADOptionCell.h */,
-				8456993C17FFC4A6003C08B6 /* ADOptionCell.m */,
 				6622AEAF18CD898F0038B1E1 /* ADDatePickerCell.h */,
 				6622AEB018CD898F0038B1E1 /* ADDatePickerCell.m */,
+				8456993B17FFC4A6003C08B6 /* ADOptionCell.h */,
+				8456993C17FFC4A6003C08B6 /* ADOptionCell.m */,
 				66F2C17E18B5B3A100C90545 /* ADPickerCell.h */,
 				66F2C17F18B5B3A100C90545 /* ADPickerCell.m */,
+				669C197118CFE4AB000B3DFA /* ADStandardCell.h */,
+				669C197218CFE4AB000B3DFA /* ADStandardCell.m */,
 				A25065A617536B5A0095B09D /* ADTableViewCell.h */,
 				A25065A717536B5A0095B09D /* ADTableViewCell.m */,
 				66F2C16F18B5860100C90545 /* ADTextAreaCell.h */,
@@ -273,6 +278,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				66F2C18018B5B3A100C90545 /* ADPickerCell.m in Sources */,
+				669C197318CFE4AB000B3DFA /* ADStandardCell.m in Sources */,
 				A250659C17535F7D0095B09D /* ADTextFieldCell.m in Sources */,
 				A25065A0175361090095B09D /* ADSectionObject.m in Sources */,
 				6622AEB118CD898F0038B1E1 /* ADDatePickerCell.m in Sources */,

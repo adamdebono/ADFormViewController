@@ -15,6 +15,7 @@
 #import "ADToggleCell.h"
 #import "ADTextFieldCell.h"
 #import "ADTextAreaCell.h"
+#import "ADStandardCell.h"
 
 @interface ADCellObject () <UITextFieldDelegate>
 
@@ -57,6 +58,9 @@
 	return self;
 }
 
+- (void)dealloc {
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 
 - (ADTableViewCell *)cell {
@@ -104,8 +108,12 @@
 				break;
 			case ADFormCellTypeCustom:
 				break;
+			case ADFormCellTypeStandard:
+				_cell = [[ADStandardCell alloc] initWithStyle:self.standardCellStyle reuseIdentifier:@"standard"];
+				[self setValue:_value];
+				break;
 		}
-		
+				
 		if ([_cell label]) {
 			[[_cell label] setText:[self title]];
 		}
@@ -331,6 +339,12 @@
 				}
 				break;
 			case ADFormCellTypeCustom:
+				break;
+			case ADFormCellTypeStandard:
+				if (!value) {
+					_value = @"";
+				}
+				[[[self cell] detailLabel] setText:[NSString stringWithFormat:@"%@", [self value]]];
 				break;
 		}
 	}

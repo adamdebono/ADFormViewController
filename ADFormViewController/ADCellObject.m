@@ -52,6 +52,8 @@
 		
 		_cellHeight = UITableViewAutomaticDimension;
 		
+		_valuePlaceholder = @"Select";
+		
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(formCellWasSelected:) name:ADFormCellDidSelect object:nil];
 	}
 	
@@ -113,7 +115,7 @@
 				[self setValue:_value];
 				break;
 		}
-				
+		
 		if ([_cell label]) {
 			[[_cell label] setText:[self title]];
 		}
@@ -224,7 +226,7 @@
 					[[self datePicker] setDate:_value];
 					[[[self cell] detailLabel] setText:[[self dateFormatter] stringFromDate:_value]];
 				} else {
-					[[[self cell] detailLabel] setText:@"select"];
+					[[[self cell] detailLabel] setText:[self valuePlaceholder]];
 				}
 				break;
 			case ADFormCellTypeSingleOption:
@@ -244,7 +246,7 @@
 							NSAssert(false, @"Option must be either array or dictionary");
 						}
 					} else {
-						[[_cell detailLabel] setText:@"select"];
+						[[_cell detailLabel] setText:[self valuePlaceholder]];
 					}
 				}
 				break;
@@ -272,13 +274,13 @@
 									NSAssert(false, @"Options must be either array or dictionary");
 								}
 							} else {
-								[[_cell detailLabel] setText:@"select"];
+								[[_cell detailLabel] setText:[self valuePlaceholder]];
 							}
 						} else {
 							NSAssert(false, @"There must be an array of values");
 						}
 					} else {
-						[[_cell detailLabel] setText:@"select"];
+						[[_cell detailLabel] setText:[self valuePlaceholder]];
 					}
 				}
 				break;
@@ -342,11 +344,20 @@
 				break;
 			case ADFormCellTypeStandard:
 				if (!value) {
-					_value = @"";
+					[[[self cell] detailLabel] setText:[self valuePlaceholder]];
+				} else {
+					[[[self cell] detailLabel] setText:[NSString stringWithFormat:@"%@", [self value]]];
 				}
-				[[[self cell] detailLabel] setText:[NSString stringWithFormat:@"%@", [self value]]];
 				break;
 		}
+	}
+}
+
+- (void)setValuePlaceholder:(NSString *)valuePlaceholder {
+	_valuePlaceholder = valuePlaceholder;
+	
+	if (!_value) {
+		[self setValue:nil];
 	}
 }
 

@@ -24,6 +24,8 @@
 	if (self) {
 		[self setReuseIdentifier:[[self class] nibName]];
 		
+		[[self detailLabel] setAdjustsFontSizeToFitWidth:YES];
+		
 		if ([[[UIDevice currentDevice] systemVersion] floatValue] < 7.0f) {
 			[[self leadingConstraint] setConstant:10.0f];
 			[[self trailingConstraint] setConstant:10.0f];

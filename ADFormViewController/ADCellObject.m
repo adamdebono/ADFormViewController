@@ -266,10 +266,18 @@
 									}
 									_value = newValue;
 									
-									[[_cell detailLabel] setText:[newValue componentsJoinedByString:@" "]];
+									if ([newValue count] == [[self options] count]) {
+										[[_cell detailLabel] setText:@"All"];
+									} else {
+										[[_cell detailLabel] setText:[newValue componentsJoinedByString:@", "]];
+									}
 								} else if ([[self options] isKindOfClass:[NSDictionary class]]) {
 									NSArray *theValues = [[self options] objectsForKeys:value notFoundMarker:[NSNull null]];
-									[[_cell detailLabel] setText:[theValues componentsJoinedByString:@" "]];
+									if ([theValues count] == [[[self options] allKeys] count]) {
+										[[_cell detailLabel] setText:@"All"];
+									} else {
+										[[_cell detailLabel] setText:[theValues componentsJoinedByString:@", "]];
+									}
 								} else {
 									NSAssert(false, @"Options must be either array or dictionary");
 								}

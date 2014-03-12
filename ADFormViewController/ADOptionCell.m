@@ -17,6 +17,7 @@
 		[[self textLabel] setFont:[UIFont systemFontOfSize:17]];
 		[[self detailLabel] setFont:[UIFont systemFontOfSize:14]];
 		[[self detailLabel] setTextColor:[UIColor blackColor]];
+		[[self detailLabel] setAdjustsFontSizeToFitWidth:YES];
 	}
 	
 	return self;

@@ -188,6 +188,10 @@
 		[[self cellObject] setValue:value];
 	} else if ([[self cellObject] type] == ADFormCellTypeMultipleOption) {
 		NSMutableArray *newValue = [[[self cellObject] value] mutableCopy];
+		if ([[[self cellObject] options] isKindOfClass:[NSArray class]] && [value isKindOfClass:[NSNumber class]]) {
+			value = [[[self cellObject] options] objectAtIndex:[value integerValue]];
+		}
+		
 		if (!newValue) {
 			newValue = [NSMutableArray array];
 		}

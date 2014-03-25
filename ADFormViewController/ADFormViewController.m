@@ -130,6 +130,8 @@
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 	
+	_onScreen = YES;
+	
 	if ([self reloadOnAppear]) {
 		_reloadOnAppear = NO;
 		[self reload:NO];
@@ -139,7 +141,7 @@
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
 	
-	_onScreen = YES;
+	
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -236,6 +238,13 @@
 			[self addCellInSection:section withCellObject:cellObject];
 		}
 	}
+}
+
+- (void)clearCellsAndSections {
+	_tableViewContent = [NSMutableArray array];
+	_selectableCellIndexPaths = [NSMutableArray array];
+	
+	[self reload];
 }
 
 #pragma mark - Values

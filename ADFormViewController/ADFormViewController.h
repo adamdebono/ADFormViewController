@@ -29,6 +29,8 @@ typedef void(^ADDoneAction)(NSDictionary *values);
 - (void)addCellInSection:(NSUInteger)section withCellObject:(ADCellObject *)cellObject;
 - (void)addCellsInSection:(NSUInteger)section withCellObjects:(NSArray *)cellObjects;
 
+- (void)clearCellsAndSections;
+
 - (id)valueForIdentifier:(NSString *)identifier;
 - (NSDictionary *)allValues;
 

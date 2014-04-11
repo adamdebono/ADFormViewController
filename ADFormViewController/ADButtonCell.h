@@ -12,4 +12,6 @@
 
 @interface ADButtonCell : ADTableViewCell
 
+@property (nonatomic) BOOL highlight;
+
 @end

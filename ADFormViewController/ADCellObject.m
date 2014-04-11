@@ -69,8 +69,11 @@
 	if (!_cell) {
 		switch ([self type]) {
 			case ADFormCellTypeButton:
+				_cell = [[ADButtonCell alloc] init];
+				break;
 			case ADFormCellTypeDoneButton:
 				_cell = [[ADButtonCell alloc] init];
+				[(ADButtonCell *)_cell setHighlight:YES];
 				break;
 			case ADFormCellTypeDatePicker:
 				_cell = [[ADDatePickerCell alloc] init];

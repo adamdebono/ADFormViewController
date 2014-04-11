@@ -10,4 +10,16 @@
 
 @implementation ADButtonCell
 
+- (void)setHighlight:(BOOL)highlight {
+	_highlight = highlight;
+	
+	[self tintColorDidChange];
+}
+
+- (void)tintColorDidChange {
+	if (self.highlight) {
+		self.label.textColor = self.tintColor;
+	}
+}
+
 @end

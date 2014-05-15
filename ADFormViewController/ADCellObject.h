@@ -58,4 +58,6 @@
 @property (nonatomic) UIColor *textColor;
 @property (nonatomic) UIColor *disabledTextColor;
 
+@property (nonatomic) BOOL roundedSectionCorners;
+
 @end

@@ -77,6 +77,8 @@
 	
 	_disabledElementColor = [UIColor lightGrayColor];
 	_disabledTextColor = [UIColor darkGrayColor];
+	
+	_roundedSectionCorners = NO;
 }
 
 - (void)setToolbarClass:(Class)toolbarClass {
@@ -228,6 +230,7 @@
 	if ([self disabledTextColor]) {
 		[cellObject setDisabledTextColor:[self disabledTextColor]];
 	}
+	[cellObject setRoundedSectionCorners:self.roundedSectionCorners];
 	
 	[self reload];
 }
@@ -655,6 +658,16 @@
 	for (ADSectionObject *section in [self tableViewContent]) {
 		for (ADCellObject *object in [section cells]) {
 			[object setTextColor:disabledTextColor];
+		}
+	}
+}
+
+- (void)setRoundedSectionCorners:(BOOL)roundedSectionCorners {
+	_roundedSectionCorners = roundedSectionCorners;
+	
+	for (ADSectionObject *section in [self tableViewContent]) {
+		for (ADCellObject *object in [section cells]) {
+			[object setRoundedSectionCorners:roundedSectionCorners];
 		}
 	}
 }

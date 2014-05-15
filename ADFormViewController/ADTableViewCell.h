@@ -14,6 +14,7 @@
 
 + (NSString *)nibName;
 
+@property (nonatomic, readonly) UITableView *tableView;
 @property (nonatomic, weak) ADCellObject *cellObject;
 
 @property (nonatomic) IBOutlet UILabel *label;
@@ -21,5 +22,7 @@
 
 @property (nonatomic) IBOutlet NSLayoutConstraint *leadingConstraint;
 @property (nonatomic) IBOutlet NSLayoutConstraint *trailingConstraint;
+
+@property (nonatomic) BOOL roundedSectionCorners;
 
 @end

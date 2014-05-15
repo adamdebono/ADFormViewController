@@ -44,4 +44,6 @@ typedef void(^ADDoneAction)(NSDictionary *values);
 @property (nonatomic, copy) UIColor *disabledElementColor;
 @property (nonatomic, copy) UIColor *disabledTextColor;
 
+@property (nonatomic) BOOL roundedSectionCorners;
+
 @end

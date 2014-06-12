@@ -17,7 +17,7 @@
 #import "ADTextAreaCell.h"
 #import "ADStandardCell.h"
 
-@interface ADCellObject () <UITextFieldDelegate>
+@interface ADCellObject () <UITextFieldDelegate, UITextViewDelegate>
 
 @property (nonatomic) BOOL userSetDateFormatter;
 
@@ -106,10 +106,7 @@
 			case ADFormCellTypeTextArea:
 				_cell = [[ADTextAreaCell alloc] init];
 				
-				if (![self value]) {
-					_value = @"";
-				}
-				[[self textView] setText:[NSString stringWithFormat:@"%@", [self value]]];
+				[self setValue:_value updateCell:YES];
 				break;
 			case ADFormCellTypeCustom:
 				break;
@@ -348,7 +345,12 @@
 					_value = @"";
 				}
 				if (_cell) {
-					[[self textView] setText:[NSString stringWithFormat:@"%@", [self value]]];
+					if ([_value length] || ![self valuePlaceholder]) {
+						[[self textView] setText:[NSString stringWithFormat:@"%@", [self value]]];
+					} else {
+						[[self textView] setText:[self valuePlaceholder]];
+						[[self textView] setTextColor:_textColor];
+					}
 				}
 				break;
 			case ADFormCellTypeCustom:
@@ -619,7 +621,28 @@
 			[[[self cell] label] setTextColor:textColor];
 			[[[self cell] detailLabel] setTextColor:textColor];
 			[[self textField] setTextColor:textColor];
-			[[self textView] setTextColor:textColor];
+			
+			if ([[[self textView] text] isEqualToString:[self valuePlaceholder]]) {
+				[[self textView] setTextColor:[self disabledTextColor]];
+			} else {
+				[[self textView] setTextColor:textColor];
+			}
+			break;
+	}
+}
+
+- (void)setDisabledTextColor:(UIColor *)disabledTextColor {
+	_disabledTextColor = disabledTextColor;
+	
+	switch ([self type]) {
+		case ADFormCellTypeCustom:
+			break;
+		default:
+			if ([[[self textView] text] isEqualToString:[self valuePlaceholder]]) {
+				[[self textView] setTextColor:[self disabledTextColor]];
+			} else {
+				[[self textView] setTextColor:[self textColor]];
+			}
 			break;
 	}
 }

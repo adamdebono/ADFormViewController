@@ -591,10 +591,17 @@
 
 - (void)textViewDidBeginEditing:(UITextView *)textView {
 	NSIndexPath *indexPath = [[self selectableCellIndexPaths] objectAtIndex:[textView tag]];
+	ADCellObject *cellObject = [[[[self tableViewContent] objectAtIndex:[indexPath section]] cells] objectAtIndex:[indexPath row]];
+	
 	[[self tableView] scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
 	
 	[[self toolbarPrevButton] setEnabled:[self hasPreviousCell]];
 	[[self toolbarNextButton] setEnabled:[self hasNextCell]];
+	
+	if (![[cellObject value] length]) {
+		[textView setText:@""];
+		[textView setTextColor:[cellObject textColor]];
+	}
 }
 
 - (void)textViewDidChange:(UITextView *)textView {
@@ -606,6 +613,16 @@
 	[[self tableView] endUpdates];
 	
 	[[cellObject textView] becomeFirstResponder];
+}
+
+- (void)textViewDidEndEditing:(UITextView *)textView {
+	NSIndexPath *indexPath = [[self selectableCellIndexPaths] objectAtIndex:[textView tag]];
+	ADCellObject *cellObject = [[[[self tableViewContent] objectAtIndex:[indexPath section]] cells] objectAtIndex:[indexPath row]];
+	
+	if (![[cellObject value] length]) {
+		[textView setText:[cellObject valuePlaceholder]];
+		[textView setTextColor:[cellObject disabledTextColor]];
+	}
 }
 
 #pragma mark - Styling

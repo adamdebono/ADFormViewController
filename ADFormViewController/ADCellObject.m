@@ -650,7 +650,9 @@
 - (void)setRoundedSectionCorners:(BOOL)roundedSectionCorners {
 	_roundedSectionCorners = roundedSectionCorners;
 	
-	self.cell.roundedSectionCorners = roundedSectionCorners;
+	if ([[self cell] isKindOfClass:[ADTableViewCell class]]) {
+		self.cell.roundedSectionCorners = roundedSectionCorners;
+	}
 }
 
 @end

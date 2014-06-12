@@ -13,7 +13,7 @@
 - (id)init {
 	if (self = [super init]) {
 		[self.textView setScrollEnabled:NO];
-		[self.textView setContentInset:UIEdgeInsetsMake(0, -5, 0, -5)];
+		[self.textView setContentInset:UIEdgeInsetsMake(0, -4, 0, -4)];
 	}
 	
 	return self;
